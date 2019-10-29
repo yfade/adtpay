@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pay.dao.mapper.OrderMapper">
+    <resultMap id="BaseResultMap" type="com.pay.dao.model.Order">
+        <id column="ID" property="id" jdbcType="BIGINT"/>
+        <result column="REQUIREMENT_ID" property="requirementId" jdbcType="BIGINT"/>
+        <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR"/>
+        <result column="PAY_MODE" property="payMode" jdbcType="INTEGER"/>
+        <result column="USER_ID" property="userId" jdbcType="BIGINT"/>
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+        <result column="TOTAL_AMOUNT" property="totalAmount" jdbcType="DECIMAL"/>
+        <result column="STATUS" property="status" jdbcType="INTEGER"/>
+        <result column="BIZ_TYPE" property="bizType" jdbcType="INTEGER"/>
+        <result column="SYS_SOURCE" property="sysSource" jdbcType="INTEGER"/>
+        <result column="FINISH_TIME" property="finishTime" jdbcType="TIMESTAMP"/>
+        <result column="CANCEL_TIME" property="cancelTime" jdbcType="TIMESTAMP"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="CREATE_USER_ID" property="createUserId" jdbcType="BIGINT"/>
+        <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="TIME_STAMP" property="timeStamp" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="VoMap" type="com.pay.dao.vo.OrderVo">
+        <id column="ID" property="id" jdbcType="BIGINT"/>
+        <result column="REQUIREMENT_ID" property="requirementId" jdbcType="BIGINT"/>
+        <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR"/>
+        <result column="PAY_MODE" property="payMode" jdbcType="INTEGER"/>
+        <result column="USER_ID" property="userId" jdbcType="BIGINT"/>
+        <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
+        <result column="TOTAL_AMOUNT" property="totalAmount" jdbcType="DECIMAL"/>
+        <result column="STATUS" property="status" jdbcType="INTEGER"/>
+        <result column="BIZ_TYPE" property="bizType" jdbcType="INTEGER"/>
+        <result column="SYS_SOURCE" property="sysSource" jdbcType="INTEGER"/>
+        <result column="FINISH_TIME" property="finishTime" jdbcType="TIMESTAMP"/>
+        <result column="CANCEL_TIME" property="cancelTime" jdbcType="TIMESTAMP"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="CREATE_USER_ID" property="createUserId" jdbcType="BIGINT"/>
+        <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="TIME_STAMP" property="timeStamp" jdbcType="TIMESTAMP"/>
+
+        <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, REQUIREMENT_ID, ORDER_NO, PAY_MODE, USER_ID, USER_NAME, TOTAL_AMOUNT, STATUS, 
+    BIZ_TYPE, SYS_SOURCE, FINISH_TIME, CANCEL_TIME, EMAIL, REMARK, CREATE_USER_ID, CREATE_USER_NAME, 
+    CREATE_TIME, TIME_STAMP
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from `order`
+        where ID = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from `order`
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.pay.dao.model.Order">
+    insert into `order` (ID, REQUIREMENT_ID, ORDER_NO, 
+      PAY_MODE, USER_ID, USER_NAME, 
+      TOTAL_AMOUNT, STATUS, BIZ_TYPE, 
+      SYS_SOURCE, FINISH_TIME, CANCEL_TIME, 
+      EMAIL, REMARK, CREATE_USER_ID, 
+      CREATE_USER_NAME, CREATE_TIME, TIME_STAMP
+      )
+    values (#{id,jdbcType=BIGINT}, #{requirementId,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, 
+      #{payMode,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{userName,jdbcType=VARCHAR}, 
+      #{totalAmount,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, #{bizType,jdbcType=INTEGER}, 
+      #{sysSource,jdbcType=INTEGER}, #{finishTime,jdbcType=TIMESTAMP}, #{cancelTime,jdbcType=TIMESTAMP}, 
+      #{email,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createUserId,jdbcType=BIGINT}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{timeStamp,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.pay.dao.model.Order" useGeneratedKeys="true" keyProperty="id">
+        insert into `order`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="requirementId != null">
+                REQUIREMENT_ID,
+            </if>
+            <if test="orderNo != null">
+                ORDER_NO,
+            </if>
+            <if test="payMode != null">
+                PAY_MODE,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="userName != null">
+                USER_NAME,
+            </if>
+            <if test="totalAmount != null">
+                TOTAL_AMOUNT,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="bizType != null">
+                BIZ_TYPE,
+            </if>
+            <if test="sysSource != null">
+                SYS_SOURCE,
+            </if>
+            <if test="finishTime != null">
+                FINISH_TIME,
+            </if>
+            <if test="cancelTime != null">
+                CANCEL_TIME,
+            </if>
+            <if test="email != null">
+                EMAIL,
+            </if>
+            <if test="remark != null">
+                REMARK,
+            </if>
+            <if test="createUserId != null">
+                CREATE_USER_ID,
+            </if>
+            <if test="createUserName != null">
+                CREATE_USER_NAME,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="timeStamp != null">
+                TIME_STAMP,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="requirementId != null">
+                #{requirementId,jdbcType=BIGINT},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payMode != null">
+                #{payMode,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="totalAmount != null">
+                #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="bizType != null">
+                #{bizType,jdbcType=INTEGER},
+            </if>
+            <if test="sysSource != null">
+                #{sysSource,jdbcType=INTEGER},
+            </if>
+            <if test="finishTime != null">
+                #{finishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cancelTime != null">
+                #{cancelTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeStamp != null">
+                #{timeStamp,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.pay.dao.model.Order">
+        update `order`
+        <set>
+            <if test="requirementId != null">
+                REQUIREMENT_ID = #{requirementId,jdbcType=BIGINT},
+            </if>
+            <if test="orderNo != null">
+                ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payMode != null">
+                PAY_MODE = #{payMode,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="userName != null">
+                USER_NAME = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="totalAmount != null">
+                TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="bizType != null">
+                BIZ_TYPE = #{bizType,jdbcType=INTEGER},
+            </if>
+            <if test="sysSource != null">
+                SYS_SOURCE = #{sysSource,jdbcType=INTEGER},
+            </if>
+            <if test="finishTime != null">
+                FINISH_TIME = #{finishTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cancelTime != null">
+                CANCEL_TIME = #{cancelTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="email != null">
+                EMAIL = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                REMARK = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                CREATE_USER_ID = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createUserName != null">
+                CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeStamp != null">
+                TIME_STAMP = #{timeStamp,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.pay.dao.model.Order">
+    update `order`
+    set REQUIREMENT_ID = #{requirementId,jdbcType=BIGINT},
+      ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      PAY_MODE = #{payMode,jdbcType=INTEGER},
+      USER_ID = #{userId,jdbcType=BIGINT},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=INTEGER},
+      BIZ_TYPE = #{bizType,jdbcType=INTEGER},
+      SYS_SOURCE = #{sysSource,jdbcType=INTEGER},
+      FINISH_TIME = #{finishTime,jdbcType=TIMESTAMP},
+      CANCEL_TIME = #{cancelTime,jdbcType=TIMESTAMP},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{createUserId,jdbcType=BIGINT},
+      CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      TIME_STAMP = #{timeStamp,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="selectOrderDetail" parameterType="long" resultMap="VoMap">
+        SELECT o.*,os.GOODS_NAME FROM `order` o
+        LEFT JOIN order_sub os ON os.ORDER_ID=o.ID
+        WHERE o.ID=#{id}
+    </select>
+</mapper>

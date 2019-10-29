@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pay.dao.mapper.GoodsMapper">
+    <resultMap id="BaseResultMap" type="com.pay.dao.model.Goods">
+        <id column="ID" property="id" jdbcType="BIGINT"/>
+        <result column="GOODS_CODE" property="goodsCode" jdbcType="VARCHAR"/>
+        <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR"/>
+        <result column="STATUS" property="status" jdbcType="INTEGER"/>
+        <result column="BIZ_TYPE" property="bizType" jdbcType="INTEGER"/>
+        <result column="PRICE" property="price" jdbcType="DECIMAL"/>
+        <result column="DISCOUNT" property="discount" jdbcType="DECIMAL"/>
+        <result column="DESCRIPTION" property="description" jdbcType="VARCHAR"/>
+        <result column="IMG_URL" property="imgUrl" jdbcType="VARCHAR"/>
+        <result column="CREATE_USER_ID" property="createUserId" jdbcType="BIGINT"/>
+        <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="LAST_UPDATE_USER_ID" property="lastUpdateUserId" jdbcType="BIGINT"/>
+        <result column="LAST_UPDATE_USER_NAME" property="lastUpdateUserName" jdbcType="VARCHAR"/>
+        <result column="TIME_STAMP" property="timeStamp" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, GOODS_CODE, GOODS_NAME, STATUS, BIZ_TYPE, PRICE, DISCOUNT, DESCRIPTION, IMG_URL, 
+    CREATE_USER_ID, CREATE_USER_NAME, CREATE_TIME, LAST_UPDATE_USER_ID, LAST_UPDATE_USER_NAME, 
+    TIME_STAMP
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from goods
+        where ID = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from goods
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.pay.dao.model.Goods">
+    insert into goods (ID, GOODS_CODE, GOODS_NAME, 
+      STATUS, BIZ_TYPE, PRICE, 
+      DISCOUNT, DESCRIPTION, IMG_URL, 
+      CREATE_USER_ID, CREATE_USER_NAME, CREATE_TIME, 
+      LAST_UPDATE_USER_ID, LAST_UPDATE_USER_NAME, TIME_STAMP
+      )
+    values (#{id,jdbcType=BIGINT}, #{goodsCode,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{bizType,jdbcType=INTEGER}, #{price,jdbcType=DECIMAL}, 
+      #{discount,jdbcType=DECIMAL}, #{description,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, 
+      #{createUserId,jdbcType=BIGINT}, #{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdateUserId,jdbcType=BIGINT}, #{lastUpdateUserName,jdbcType=VARCHAR}, #{timeStamp,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.pay.dao.model.Goods">
+        insert into goods
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="goodsCode != null">
+                GOODS_CODE,
+            </if>
+            <if test="goodsName != null">
+                GOODS_NAME,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="bizType != null">
+                BIZ_TYPE,
+            </if>
+            <if test="price != null">
+                PRICE,
+            </if>
+            <if test="discount != null">
+                DISCOUNT,
+            </if>
+            <if test="description != null">
+                DESCRIPTION,
+            </if>
+            <if test="imgUrl != null">
+                IMG_URL,
+            </if>
+            <if test="createUserId != null">
+                CREATE_USER_ID,
+            </if>
+            <if test="createUserName != null">
+                CREATE_USER_NAME,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="lastUpdateUserId != null">
+                LAST_UPDATE_USER_ID,
+            </if>
+            <if test="lastUpdateUserName != null">
+                LAST_UPDATE_USER_NAME,
+            </if>
+            <if test="timeStamp != null">
+                TIME_STAMP,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="goodsCode != null">
+                #{goodsCode,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsName != null">
+                #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="bizType != null">
+                #{bizType,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="discount != null">
+                #{discount,jdbcType=DECIMAL},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null">
+                #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateUserId != null">
+                #{lastUpdateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="lastUpdateUserName != null">
+                #{lastUpdateUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="timeStamp != null">
+                #{timeStamp,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.pay.dao.model.Goods">
+        update goods
+        <set>
+            <if test="goodsCode != null">
+                GOODS_CODE = #{goodsCode,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsName != null">
+                GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="bizType != null">
+                BIZ_TYPE = #{bizType,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                PRICE = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="discount != null">
+                DISCOUNT = #{discount,jdbcType=DECIMAL},
+            </if>
+            <if test="description != null">
+                DESCRIPTION = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null">
+                IMG_URL = #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                CREATE_USER_ID = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createUserName != null">
+                CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lastUpdateUserId != null">
+                LAST_UPDATE_USER_ID = #{lastUpdateUserId,jdbcType=BIGINT},
+            </if>
+            <if test="lastUpdateUserName != null">
+                LAST_UPDATE_USER_NAME = #{lastUpdateUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="timeStamp != null">
+                TIME_STAMP = #{timeStamp,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.pay.dao.model.Goods">
+    update goods
+    set GOODS_CODE = #{goodsCode,jdbcType=VARCHAR},
+      GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      BIZ_TYPE = #{bizType,jdbcType=INTEGER},
+      PRICE = #{price,jdbcType=DECIMAL},
+      DISCOUNT = #{discount,jdbcType=DECIMAL},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      IMG_URL = #{imgUrl,jdbcType=VARCHAR},
+      CREATE_USER_ID = #{createUserId,jdbcType=BIGINT},
+      CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      LAST_UPDATE_USER_ID = #{lastUpdateUserId,jdbcType=BIGINT},
+      LAST_UPDATE_USER_NAME = #{lastUpdateUserName,jdbcType=VARCHAR},
+      TIME_STAMP = #{timeStamp,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

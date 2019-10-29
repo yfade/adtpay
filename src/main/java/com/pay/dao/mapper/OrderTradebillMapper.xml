@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pay.dao.mapper.OrderTradebillMapper" >
+  <resultMap id="BaseResultMap" type="com.pay.dao.model.OrderTradebill" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="USER_ID" property="userId" jdbcType="BIGINT" />
+    <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR" />
+    <result column="PAY_MODE" property="payMode" jdbcType="INTEGER" />
+    <result column="BIZ_TYPE" property="bizType" jdbcType="INTEGER" />
+    <result column="SYS_TYPE" property="sysType" jdbcType="INTEGER" />
+    <result column="TOTAL_AMOUNT" property="totalAmount" jdbcType="DECIMAL" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="PAY_TIME" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="TIME_STAMP" property="timeStamp" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, ORDER_NO, PAY_MODE, BIZ_TYPE, SYS_TYPE, TOTAL_AMOUNT, STATUS, PAY_TIME, 
+    CREATE_TIME, TIME_STAMP
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_tradebill
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from order_tradebill
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.pay.dao.model.OrderTradebill" >
+    insert into order_tradebill (ID, USER_ID, ORDER_NO, 
+      PAY_MODE, BIZ_TYPE, SYS_TYPE, 
+      TOTAL_AMOUNT, STATUS, PAY_TIME, 
+      CREATE_TIME, TIME_STAMP)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, 
+      #{payMode,jdbcType=INTEGER}, #{bizType,jdbcType=INTEGER}, #{sysType,jdbcType=INTEGER}, 
+      #{totalAmount,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, #{payTime,jdbcType=TIMESTAMP}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{timeStamp,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pay.dao.model.OrderTradebill" >
+    insert into order_tradebill
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO,
+      </if>
+      <if test="payMode != null" >
+        PAY_MODE,
+      </if>
+      <if test="bizType != null" >
+        BIZ_TYPE,
+      </if>
+      <if test="sysType != null" >
+        SYS_TYPE,
+      </if>
+      <if test="totalAmount != null" >
+        TOTAL_AMOUNT,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="payTime != null" >
+        PAY_TIME,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="timeStamp != null" >
+        TIME_STAMP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payMode != null" >
+        #{payMode,jdbcType=INTEGER},
+      </if>
+      <if test="bizType != null" >
+        #{bizType,jdbcType=INTEGER},
+      </if>
+      <if test="sysType != null" >
+        #{sysType,jdbcType=INTEGER},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeStamp != null" >
+        #{timeStamp,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pay.dao.model.OrderTradebill" >
+    update order_tradebill
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="payMode != null" >
+        PAY_MODE = #{payMode,jdbcType=INTEGER},
+      </if>
+      <if test="bizType != null" >
+        BIZ_TYPE = #{bizType,jdbcType=INTEGER},
+      </if>
+      <if test="sysType != null" >
+        SYS_TYPE = #{sysType,jdbcType=INTEGER},
+      </if>
+      <if test="totalAmount != null" >
+        TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="payTime != null" >
+        PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeStamp != null" >
+        TIME_STAMP = #{timeStamp,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pay.dao.model.OrderTradebill" >
+    update order_tradebill
+    set USER_ID = #{userId,jdbcType=BIGINT},
+      ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      PAY_MODE = #{payMode,jdbcType=INTEGER},
+      BIZ_TYPE = #{bizType,jdbcType=INTEGER},
+      SYS_TYPE = #{sysType,jdbcType=INTEGER},
+      TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
+      STATUS = #{status,jdbcType=INTEGER},
+      PAY_TIME = #{payTime,jdbcType=TIMESTAMP},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      TIME_STAMP = #{timeStamp,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

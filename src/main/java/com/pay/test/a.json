@@ -1,0 +1,1251 @@
+{
+  "filters": [
+    {
+      "name": "Filter by name",
+      "path": "name",
+      "type": "SINGLE",
+      "selected": true,
+      "value": "Biella-Neher Holding AG"
+    },
+    {
+      "name": "Filter by address country code",
+      "path": "address.countryCode",
+      "type": "SINGLE",
+      "selected": true,
+      "value": "CHE"
+    },
+    {
+      "name": "Filter by address region code",
+      "path": "address.regionCode",
+      "type": "SINGLE",
+      "selected": false
+    },
+    {
+      "name": "Filter by address subRegion code",
+      "path": "address.subRegionCode",
+      "type": "SINGLE",
+      "selected": false
+    },
+    {
+      "name": "Filter by address city code",
+      "path": "address.city",
+      "type": "SINGLE",
+      "selected": false
+    },
+    {
+      "name": "Filter by address zip code",
+      "path": "address.zipCode",
+      "type": "SINGLE",
+      "selected": false
+    },
+    {
+      "name": "Filter by address address",
+      "path": "address.address",
+      "type": "SINGLE",
+      "selected": false
+    },
+    {
+      "name": "Filter by address street",
+      "path": "address.street",
+      "type": "SINGLE",
+      "selected": false
+    },
+    {
+      "name": "Filter by address house number",
+      "path": "address.houseNumber",
+      "type": "SINGLE",
+      "selected": false
+    },
+    {
+      "name": "Filter by address location type",
+      "path": "address.locationType",
+      "type": "SELECT",
+      "selected": true,
+      "selectedOption": "ALL",
+      "options": [
+        "ALL",
+        "HEADQUARTER"
+      ]
+    },
+    {
+      "name": "Filter by contact phone",
+      "path": "contact.phone",
+      "type": "SINGLE",
+      "selected": false
+    },
+    {
+      "name": "Filter by identifier supplier id",
+      "path": "identifier.supplierId",
+      "type": "SINGLE",
+      "selected": false
+    },
+    {
+      "name": "Filter by identifier tax id",
+      "path": "identifier.taxId",
+      "type": "SINGLE",
+      "selected": false
+    },
+    {
+      "name": "Filter by identifier vat number",
+      "path": "identifier.vatNumber",
+      "type": "SINGLE",
+      "selected": false
+    },
+    {
+      "name": "Filter by identifier registration number",
+      "path": "identifier.registrationNumber",
+      "type": "SINGLE",
+      "selected": false
+    }
+  ],
+  "matchStatus": "CANDIDATES",
+  "companiesFound": 27,
+  "companies": [
+    {
+      "name": "Biella-Neher Holding AG",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Erlenstrasse 44, 2555 Brügg BE, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-BE",
+          "city": "Brügg BE",
+          "zipCode": "2555",
+          "street": "Erlenstrasse",
+          "houseNumber": "44"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1679000192980851"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE101834037"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH07330002473"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Biella-Neher AG",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Erlenweg 44, 2503 Biel/Bienne, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-BE",
+          "city": "Biel/Bienne",
+          "zipCode": "2503",
+          "street": "Erlenweg",
+          "houseNumber": "44"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1337000197727379"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Biella-Neher AG",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Erlenstrasse 44, 2555 Brügg BE, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-BE",
+          "city": "Brügg BE",
+          "zipCode": "2555",
+          "street": "Erlenstrasse",
+          "houseNumber": "44"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1307000192980849"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE101834037"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH07330002473"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Neher Holding AG",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Waaghausgasse 1, 3011 Bern, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-BE",
+          "city": "Bern",
+          "zipCode": "3011",
+          "street": "Waaghausgasse",
+          "houseNumber": "1"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1157000242498525"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE101331606"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH21705308236"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Neher Holding AG",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Marcoup 20, 3286 Muntelier, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-FR",
+          "city": "Muntelier",
+          "zipCode": "3286",
+          "street": "Marcoup",
+          "houseNumber": "20"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1983000172309998"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE101331606"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH21705308236"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Biella Schweiz AG",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Erlenstr. 44, 2503 Biel/Bienne, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-BE",
+          "city": "Biel/Bienne",
+          "zipCode": "2503",
+          "street": "Erlenstr.",
+          "houseNumber": "44"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1809000150753902"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE114319649"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH03630414246"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Personalvorsorge-Stiftung der Biella-Neher AG in Liquidation",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Erlenstrasse 44, 2555 Brügg BE, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-BE",
+          "city": "Brügg BE",
+          "zipCode": "2555",
+          "street": "Erlenstrasse",
+          "houseNumber": "44"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1101000230219182"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE109327086"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH07370038227"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Personalvorsorge-Stiftung der Biella-Neher AG",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Erlenstrasse 44, 2555 Brügg BE, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-BE",
+          "city": "Brügg BE",
+          "zipCode": "2555",
+          "street": "Erlenstrasse",
+          "houseNumber": "44"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1180000155756207"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE109327086"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH07370038227"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "SA Holding AG",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Jurastrasse 33, 4900 Langenthal, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-BE",
+          "city": "Langenthal",
+          "zipCode": "4900",
+          "street": "Jurastrasse",
+          "houseNumber": "33"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1767000195034234"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE107514393"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH05330083351"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Neher",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "3777 Saanenmöser, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-BE",
+          "city": "Saanenmöser",
+          "zipCode": "3777"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1431000173492155"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Neher",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Sägestrasse 4, 8280 Kreuzlingen, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-TG",
+          "city": "Kreuzlingen",
+          "zipCode": "8280",
+          "street": "Sägestrasse",
+          "houseNumber": "4"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1581000166364352"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Holding 191 AG",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "8750 Klöntal, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-GL",
+          "city": "Klöntal",
+          "zipCode": "8750"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1914000171321565"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "730 Holding AG",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Uekerstrasse 20, 5027 Herznach, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-AG",
+          "city": "Herznach",
+          "zipCode": "5027",
+          "street": "Uekerstrasse",
+          "houseNumber": "20"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1873000166470233"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE103384542"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH40030166034"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Alex Neher AG, Metallwaren- und Werkzeugfabrik",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Felsensteinstrasse 8, 9642 Ebnat-Kappel, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-SG",
+          "city": "Ebnat-Kappel",
+          "zipCode": "9642",
+          "street": "Felsensteinstrasse",
+          "houseNumber": "8"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1743000164439186"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE101315895"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH32030080615"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "3F-Holding AG",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Mühlebachstrasse 5, 6370 Stans, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-NW",
+          "city": "Stans",
+          "zipCode": "6370",
+          "street": "Mühlebachstrasse",
+          "houseNumber": "5"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1611000167585805"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE103055908"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH17030114983"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "5E Holding AG",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Innere Güterstrasse 4, 6300 Zug, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-ZG",
+          "city": "Zug",
+          "zipCode": "6300",
+          "street": "Innere Güterstrasse",
+          "houseNumber": "4"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1736000165905493"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE100957973"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH17030222168"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "5E Holding AG",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Löberenstrasse 19, 6300 Zug, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-ZG",
+          "city": "Zug",
+          "zipCode": "6300",
+          "street": "Löberenstrasse",
+          "houseNumber": "19"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1068000165905492"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE100957973"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH17030222168"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "5E Holding AG",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Alpenstrasse 14, 6300 Zug, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-ZG",
+          "city": "Zug",
+          "zipCode": "6300",
+          "street": "Alpenstrasse",
+          "houseNumber": "14"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1961000165905489"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE100957973"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH17030222168"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "4TM Holding AG",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Wartstrasse 31, 8400 Winterthur, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-ZH",
+          "city": "Winterthur",
+          "zipCode": "8400",
+          "street": "Wartstrasse",
+          "houseNumber": "31"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1116000164542949"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE109065503"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH02030246629"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Moebel Biella",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Badenerstrasse 23, 8004 Zürich, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-ZH",
+          "city": "Zürich",
+          "zipCode": "8004",
+          "street": "Badenerstrasse",
+          "houseNumber": "23"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1338000239683565"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Chalet Neher Ferienhaus",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "3777 Saanenmöser, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-BE",
+          "city": "Saanenmöser",
+          "zipCode": "3777"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1422000152614900"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Möbel Biella, Sonnenhof",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Zürcherstrasse 4, 8640 Rapperswil SG, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-SG",
+          "city": "Rapperswil SG",
+          "zipCode": "8640",
+          "street": "Zürcherstrasse",
+          "houseNumber": "4"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1821000155900030"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE110416153"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH32010294934"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "thomas neher vermögensverwaltung",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Seefeldstrasse 62, 8008 Zürich, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-ZH",
+          "city": "Zürich",
+          "zipCode": "8008",
+          "street": "Seefeldstrasse",
+          "houseNumber": "62"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1509000172151812"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE110490296"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH02010443927"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Möbel Biella",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Badenerstrasse 281, 8003 Zürich, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-ZH",
+          "city": "Zürich",
+          "zipCode": "8003",
+          "street": "Badenerstrasse",
+          "houseNumber": "281"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1887000180847227"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_UID",
+          "number": "CHE107839168"
+        },
+        {
+          "type": "REGISTRATION_NUMBER",
+          "name": "CH_NUMBER",
+          "number": "CH02010038803"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Neher-Schreier Luise",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Obere Plessurstrasse 5, 7000 Chur, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-GR",
+          "city": "Chur",
+          "zipCode": "7000",
+          "street": "Obere Plessurstrasse",
+          "houseNumber": "5"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1446000168466433"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Bella",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Via Valdani 1, 6830 Chiasso, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-TI",
+          "city": "Chiasso",
+          "zipCode": "6830",
+          "street": "Via Valdani",
+          "houseNumber": "1"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1942000169115814"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    },
+    {
+      "name": "Bella",
+      "localNames": [],
+      "tradeNames": [],
+      "provider": {
+        "name": "CRIF AG",
+        "code": "SPV65"
+      },
+      "addresses": [
+        {
+          "type": "REGISTERED_ADDRESS",
+          "typeDescription": "Registered Address",
+          "address": "Goldbacherstrasse 10, 8700 Küsnacht ZH, Switzerland",
+          "country": "Switzerland",
+          "countryCode": "CHE",
+          "regionCode": "CH-ZH",
+          "city": "Küsnacht ZH",
+          "zipCode": "8700",
+          "street": "Goldbacherstrasse",
+          "houseNumber": "10"
+        }
+      ],
+      "identifiers": [
+        {
+          "type": "SUPPLIER_ID",
+          "name": "ADDRESS_ID",
+          "number": "1243000153751760"
+        }
+      ],
+      "additionalInformation": [
+        {
+          "key": "IDENTIFICATION_RESULT_NOTES",
+          "value": "NOT_PROVIDED"
+        }
+      ]
+    }
+  ]
+}

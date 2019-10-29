@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.pay.dao.mapper.OrderSubMapper">
+    <resultMap id="BaseResultMap" type="com.pay.dao.model.OrderSub">
+        <id column="ID" property="id" jdbcType="BIGINT"/>
+        <result column="ORDER_ID" property="orderId" jdbcType="BIGINT"/>
+        <result column="REQUIREMENT_SUB_ID" property="requirementSubId" jdbcType="BIGINT"/>
+        <result column="GOODS_ID" property="goodsId" jdbcType="BIGINT"/>
+        <result column="GOODS_NAME" property="goodsName" jdbcType="VARCHAR"/>
+        <result column="BUY_COUNT" property="buyCount" jdbcType="INTEGER"/>
+        <result column="PRICE" property="price" jdbcType="DECIMAL"/>
+        <result column="DISCOUNT" property="discount" jdbcType="DECIMAL"/>
+        <result column="AMOUNT" property="amount" jdbcType="DECIMAL"/>
+        <result column="ADD_ATTACH" property="addAttach" jdbcType="VARCHAR"/>
+        <result column="STATUS" property="status" jdbcType="INTEGER"/>
+        <result column="CREATE_USER_ID" property="createUserId" jdbcType="BIGINT"/>
+        <result column="CREATE_USER_NAME" property="createUserName" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="TIME_STAMP" property="timeStamp" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.pay.dao.model.OrderSub" extends="BaseResultMap">
+        <result column="ATTACH" property="attach" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, ORDER_ID, REQUIREMENT_SUB_ID, GOODS_ID, GOODS_NAME, BUY_COUNT, PRICE, DISCOUNT, 
+    AMOUNT, ADD_ATTACH, STATUS, CREATE_USER_ID, CREATE_USER_NAME, CREATE_TIME, TIME_STAMP
+  </sql>
+    <sql id="Blob_Column_List">
+    ATTACH
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from order_sub
+        where ID = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from order_sub
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.pay.dao.model.OrderSub">
+    insert into order_sub (ID, ORDER_ID, REQUIREMENT_SUB_ID, 
+      GOODS_ID, GOODS_NAME, BUY_COUNT, 
+      PRICE, DISCOUNT, AMOUNT, 
+      ADD_ATTACH, STATUS, CREATE_USER_ID, 
+      CREATE_USER_NAME, CREATE_TIME, TIME_STAMP, 
+      ATTACH)
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{requirementSubId,jdbcType=BIGINT}, 
+      #{goodsId,jdbcType=BIGINT}, #{goodsName,jdbcType=VARCHAR}, #{buyCount,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{discount,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, 
+      #{addAttach,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createUserId,jdbcType=BIGINT}, 
+      #{createUserName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{timeStamp,jdbcType=TIMESTAMP}, 
+      #{attach,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.pay.dao.model.OrderSub">
+        insert into order_sub
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="orderId != null">
+                ORDER_ID,
+            </if>
+            <if test="requirementSubId != null">
+                REQUIREMENT_SUB_ID,
+            </if>
+            <if test="goodsId != null">
+                GOODS_ID,
+            </if>
+            <if test="goodsName != null">
+                GOODS_NAME,
+            </if>
+            <if test="buyCount != null">
+                BUY_COUNT,
+            </if>
+            <if test="price != null">
+                PRICE,
+            </if>
+            <if test="discount != null">
+                DISCOUNT,
+            </if>
+            <if test="amount != null">
+                AMOUNT,
+            </if>
+            <if test="addAttach != null">
+                ADD_ATTACH,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="createUserId != null">
+                CREATE_USER_ID,
+            </if>
+            <if test="createUserName != null">
+                CREATE_USER_NAME,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="timeStamp != null">
+                TIME_STAMP,
+            </if>
+            <if test="attach != null">
+                ATTACH,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="orderId != null">
+                #{orderId,jdbcType=BIGINT},
+            </if>
+            <if test="requirementSubId != null">
+                #{requirementSubId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsId != null">
+                #{goodsId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsName != null">
+                #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="buyCount != null">
+                #{buyCount,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="discount != null">
+                #{discount,jdbcType=DECIMAL},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="addAttach != null">
+                #{addAttach,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createUserName != null">
+                #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeStamp != null">
+                #{timeStamp,jdbcType=TIMESTAMP},
+            </if>
+            <if test="attach != null">
+                #{attach,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.pay.dao.model.OrderSub">
+        update order_sub
+        <set>
+            <if test="orderId != null">
+                ORDER_ID = #{orderId,jdbcType=BIGINT},
+            </if>
+            <if test="requirementSubId != null">
+                REQUIREMENT_SUB_ID = #{requirementSubId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsId != null">
+                GOODS_ID = #{goodsId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsName != null">
+                GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="buyCount != null">
+                BUY_COUNT = #{buyCount,jdbcType=INTEGER},
+            </if>
+            <if test="price != null">
+                PRICE = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="discount != null">
+                DISCOUNT = #{discount,jdbcType=DECIMAL},
+            </if>
+            <if test="amount != null">
+                AMOUNT = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="addAttach != null">
+                ADD_ATTACH = #{addAttach,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createUserId != null">
+                CREATE_USER_ID = #{createUserId,jdbcType=BIGINT},
+            </if>
+            <if test="createUserName != null">
+                CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeStamp != null">
+                TIME_STAMP = #{timeStamp,jdbcType=TIMESTAMP},
+            </if>
+            <if test="attach != null">
+                ATTACH = #{attach,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pay.dao.model.OrderSub">
+    update order_sub
+    set ORDER_ID = #{orderId,jdbcType=BIGINT},
+      REQUIREMENT_SUB_ID = #{requirementSubId,jdbcType=BIGINT},
+      GOODS_ID = #{goodsId,jdbcType=BIGINT},
+      GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      BUY_COUNT = #{buyCount,jdbcType=INTEGER},
+      PRICE = #{price,jdbcType=DECIMAL},
+      DISCOUNT = #{discount,jdbcType=DECIMAL},
+      AMOUNT = #{amount,jdbcType=DECIMAL},
+      ADD_ATTACH = #{addAttach,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      CREATE_USER_ID = #{createUserId,jdbcType=BIGINT},
+      CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      TIME_STAMP = #{timeStamp,jdbcType=TIMESTAMP},
+      ATTACH = #{attach,jdbcType=LONGVARCHAR}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.pay.dao.model.OrderSub">
+    update order_sub
+    set ORDER_ID = #{orderId,jdbcType=BIGINT},
+      REQUIREMENT_SUB_ID = #{requirementSubId,jdbcType=BIGINT},
+      GOODS_ID = #{goodsId,jdbcType=BIGINT},
+      GOODS_NAME = #{goodsName,jdbcType=VARCHAR},
+      BUY_COUNT = #{buyCount,jdbcType=INTEGER},
+      PRICE = #{price,jdbcType=DECIMAL},
+      DISCOUNT = #{discount,jdbcType=DECIMAL},
+      AMOUNT = #{amount,jdbcType=DECIMAL},
+      ADD_ATTACH = #{addAttach,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=INTEGER},
+      CREATE_USER_ID = #{createUserId,jdbcType=BIGINT},
+      CREATE_USER_NAME = #{createUserName,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      TIME_STAMP = #{timeStamp,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+
+</mapper>

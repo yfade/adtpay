@@ -3,9 +3,14 @@ package com.pay.dao.vo.serviceVo;
 import java.math.BigDecimal;
 
 public class AliPayOrder extends PayOrder {
-    private String subject;
-    private String timeoutExpress;
+    private String productCode;
     private BigDecimal totalAmount;
+    private String subject;
+    private String timeExpire;
+    private String passbackParams;
+    private String goodsType;
+    private String timeoutExpress;
+
 
     public String getSubject() {
         return subject;
@@ -29,5 +34,37 @@ public class AliPayOrder extends PayOrder {
 
     public void setTimeoutExpress(String timeoutExpress) {
         this.timeoutExpress = timeoutExpress;
+    }
+
+    public String getProductCode() {
+        return productCode;
+    }
+
+    public void setProductCode(String productCode) {
+        this.productCode = productCode;
+    }
+
+    public String getTimeExpire() {
+        return timeExpire;
+    }
+
+    public void setTimeExpire(String timeExpire) {
+        this.timeExpire = timeExpire;
+    }
+
+    public String getPassbackParams() {
+        return passbackParams;
+    }
+
+    public void setPassbackParams(String passbackParams) {
+        this.passbackParams = passbackParams;
+    }
+
+    public String getGoodsType() {
+        return goodsType;
+    }
+
+    public void setGoodsType(String goodsType) {
+        this.goodsType = goodsType;
     }
 }

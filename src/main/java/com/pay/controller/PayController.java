@@ -10,14 +10,14 @@ import com.pay.dao.vo.OrderVo;
 import com.pay.dao.vo.serviceVo.AliPayOrder;
 import com.pay.dao.vo.serviceVo.WxPayOrder;
 import com.pay.enums.FeeTypeConstant;
+import com.pay.enums.PayConstant;
 import com.pay.enums.StatusEnum;
 import com.pay.enums.SystemEnum;
-import com.pay.enums.PayConstant;
 import com.pay.service.GoodsService;
 import com.pay.service.OrderService;
 import com.pay.service.PayService;
-import com.pay.util.IpUtil;
 import com.pay.util.OrderNoGenerator;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -166,13 +166,15 @@ public class PayController {
         }
         try {
             AliPayOrder aliPayOrder = new AliPayOrder();
-            aliPayOrder.setSubject(orderVo.getGoodsName());
+            aliPayOrder.setSubject(SystemEnum.QTCAPP.getMsg() + orderVo.getGoodsName() + orderVo.getGoodsName());
             aliPayOrder.setBody(orderVo.getDescription());
             aliPayOrder.setOutTradeNo(orderVo.getOrderNo());
             aliPayOrder.setTimeoutExpress("30m");
-            aliPayOrder.setTotalAmount(orderVo.getTotalAmount());
+            aliPayOrder.setTotalAmount(orderVo.getTotalAmount().setScale(2, BigDecimal.ROUND_HALF_UP));
             aliPayOrder.setNotifyUrl("http://www.example.com/wxpay/notify");
-            aliPayOrder.setTradeType(PayConstant.ALI_APP);
+            aliPayOrder.setTradeType(PayConstant.ALI_PC);
+            aliPayOrder.setSpbillCreateIp("127.0.0.1");
+            aliPayOrder.setDeviceInfo((String) data.get("deviceInfo"));
 
             aliPayOrder.setUserId(orderVo.getUserId());
             aliPayOrder.setUserName(orderVo.getUserName());
@@ -181,6 +183,19 @@ public class PayController {
         } catch (Exception e) {
             logger.error("PayController payOrder error:", e);
             return ResultMsg.fail();
+        }
+    }
+
+    @RequestMapping("/wxNotify")
+    public String wxNotify(HttpServletRequest request) {
+        try {
+            String xmlResult = IOUtils.toString(request.getInputStream(), request.getCharacterEncoding());
+
+            return null;
+        } catch (Exception e) {
+            System.out.println("微信手机支付失败:" + e.getMessage());
+            String result = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>" + "<return_msg><![CDATA[报文为空]]></return_msg>" + "</xml> ";
+            return result;
         }
     }
 

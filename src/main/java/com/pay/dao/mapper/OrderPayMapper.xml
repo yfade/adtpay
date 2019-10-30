@@ -1,242 +1,253 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.pay.dao.mapper.OrderPayMapper" >
-  <resultMap id="BaseResultMap" type="com.pay.dao.model.OrderPay" >
-    <id column="ID" property="id" jdbcType="BIGINT" />
-    <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR" />
-    <result column="PAY_MODE" property="payMode" jdbcType="INTEGER" />
-    <result column="TOTAL_AMOUNT" property="totalAmount" jdbcType="DECIMAL" />
-    <result column="STATUS" property="status" jdbcType="INTEGER" />
-    <result column="CLIENT_IP" property="clientIp" jdbcType="VARCHAR" />
-    <result column="DEVICE" property="device" jdbcType="VARCHAR" />
-    <result column="TITLE" property="title" jdbcType="VARCHAR" />
-    <result column="DETAIL" property="detail" jdbcType="VARCHAR" />
-    <result column="EXTRA" property="extra" jdbcType="VARCHAR" />
-    <result column="ERR_CODE" property="errCode" jdbcType="VARCHAR" />
-    <result column="ERR_MSG" property="errMsg" jdbcType="VARCHAR" />
-    <result column="NOTIFY_URL" property="notifyUrl" jdbcType="VARCHAR" />
-    <result column="NOTIFY_COUNT" property="notifyCount" jdbcType="TINYINT" />
-    <result column="LAST_NOTIFY_TIME" property="lastNotifyTime" jdbcType="TIMESTAMP" />
-    <result column="EXPIRE_TIME" property="expireTime" jdbcType="TIMESTAMP" />
-    <result column="PAY_TIME" property="payTime" jdbcType="DECIMAL" />
-    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="TIME_STAMP" property="timeStamp" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    ID, ORDER_NO, PAY_MODE, TOTAL_AMOUNT, STATUS, CLIENT_IP, DEVICE, TITLE, DETAIL, EXTRA, 
-    ERR_CODE, ERR_MSG, NOTIFY_URL, NOTIFY_COUNT, LAST_NOTIFY_TIME, EXPIRE_TIME, PAY_TIME, 
-    CREATE_TIME, TIME_STAMP
+<mapper namespace="com.pay.dao.mapper.OrderPayMapper">
+    <resultMap id="BaseResultMap" type="com.pay.dao.model.OrderPay">
+        <id column="ID" property="id" jdbcType="BIGINT"/>
+        <result column="USER_ID" property="userId" jdbcType="BIGINT"/>
+        <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR"/>
+        <result column="PAY_MODE" property="payMode" jdbcType="INTEGER"/>
+        <result column="TOTAL_AMOUNT" property="totalAmount" jdbcType="DECIMAL"/>
+        <result column="STATUS" property="status" jdbcType="INTEGER"/>
+        <result column="CLIENT_IP" property="clientIp" jdbcType="VARCHAR"/>
+        <result column="DEVICE" property="device" jdbcType="VARCHAR"/>
+        <result column="TITLE" property="title" jdbcType="VARCHAR"/>
+        <result column="DETAIL" property="detail" jdbcType="VARCHAR"/>
+        <result column="EXTRA" property="extra" jdbcType="VARCHAR"/>
+        <result column="ERR_CODE" property="errCode" jdbcType="VARCHAR"/>
+        <result column="ERR_MSG" property="errMsg" jdbcType="VARCHAR"/>
+        <result column="NOTIFY_URL" property="notifyUrl" jdbcType="VARCHAR"/>
+        <result column="NOTIFY_COUNT" property="notifyCount" jdbcType="TINYINT"/>
+        <result column="LAST_NOTIFY_TIME" property="lastNotifyTime" jdbcType="TIMESTAMP"/>
+        <result column="EXPIRE_TIME" property="expireTime" jdbcType="TIMESTAMP"/>
+        <result column="PAY_TIME" property="payTime" jdbcType="DECIMAL"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="TIME_STAMP" property="timeStamp" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ID, USER_ID, ORDER_NO, PAY_MODE, TOTAL_AMOUNT, STATUS, CLIENT_IP, DEVICE, TITLE, 
+    DETAIL, EXTRA, ERR_CODE, ERR_MSG, NOTIFY_URL, NOTIFY_COUNT, LAST_NOTIFY_TIME, EXPIRE_TIME, 
+    PAY_TIME, CREATE_TIME, TIME_STAMP
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select 
-    <include refid="Base_Column_List" />
-    from order_pay
-    where ID = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from order_pay
+        where ID = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from order_pay
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.pay.dao.model.OrderPay" >
-    insert into order_pay (ID, ORDER_NO, PAY_MODE, 
-      TOTAL_AMOUNT, STATUS, CLIENT_IP, 
-      DEVICE, TITLE, DETAIL, 
-      EXTRA, ERR_CODE, ERR_MSG, 
-      NOTIFY_URL, NOTIFY_COUNT, LAST_NOTIFY_TIME, 
-      EXPIRE_TIME, PAY_TIME, CREATE_TIME, 
-      TIME_STAMP)
-    values (#{id,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, #{payMode,jdbcType=INTEGER}, 
-      #{totalAmount,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, #{clientIp,jdbcType=VARCHAR}, 
-      #{device,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, 
-      #{extra,jdbcType=VARCHAR}, #{errCode,jdbcType=VARCHAR}, #{errMsg,jdbcType=VARCHAR}, 
-      #{notifyUrl,jdbcType=VARCHAR}, #{notifyCount,jdbcType=TINYINT}, #{lastNotifyTime,jdbcType=TIMESTAMP}, 
-      #{expireTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{timeStamp,jdbcType=TIMESTAMP})
+    <insert id="insert" parameterType="com.pay.dao.model.OrderPay">
+    insert into order_pay (ID, USER_ID, ORDER_NO, 
+      PAY_MODE, TOTAL_AMOUNT, STATUS, 
+      CLIENT_IP, DEVICE, TITLE, 
+      DETAIL, EXTRA, ERR_CODE, 
+      ERR_MSG, NOTIFY_URL, NOTIFY_COUNT, 
+      LAST_NOTIFY_TIME, EXPIRE_TIME, PAY_TIME, 
+      CREATE_TIME, TIME_STAMP)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, 
+      #{payMode,jdbcType=INTEGER}, #{totalAmount,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, 
+      #{clientIp,jdbcType=VARCHAR}, #{device,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{detail,jdbcType=VARCHAR}, #{extra,jdbcType=VARCHAR}, #{errCode,jdbcType=VARCHAR}, 
+      #{errMsg,jdbcType=VARCHAR}, #{notifyUrl,jdbcType=VARCHAR}, #{notifyCount,jdbcType=TINYINT}, 
+      #{lastNotifyTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=DECIMAL}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{timeStamp,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.pay.dao.model.OrderPay" >
-    insert into order_pay
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        ID,
-      </if>
-      <if test="orderNo != null" >
-        ORDER_NO,
-      </if>
-      <if test="payMode != null" >
-        PAY_MODE,
-      </if>
-      <if test="totalAmount != null" >
-        TOTAL_AMOUNT,
-      </if>
-      <if test="status != null" >
-        STATUS,
-      </if>
-      <if test="clientIp != null" >
-        CLIENT_IP,
-      </if>
-      <if test="device != null" >
-        DEVICE,
-      </if>
-      <if test="title != null" >
-        TITLE,
-      </if>
-      <if test="detail != null" >
-        DETAIL,
-      </if>
-      <if test="extra != null" >
-        EXTRA,
-      </if>
-      <if test="errCode != null" >
-        ERR_CODE,
-      </if>
-      <if test="errMsg != null" >
-        ERR_MSG,
-      </if>
-      <if test="notifyUrl != null" >
-        NOTIFY_URL,
-      </if>
-      <if test="notifyCount != null" >
-        NOTIFY_COUNT,
-      </if>
-      <if test="lastNotifyTime != null" >
-        LAST_NOTIFY_TIME,
-      </if>
-      <if test="expireTime != null" >
-        EXPIRE_TIME,
-      </if>
-      <if test="payTime != null" >
-        PAY_TIME,
-      </if>
-      <if test="createTime != null" >
-        CREATE_TIME,
-      </if>
-      <if test="timeStamp != null" >
-        TIME_STAMP,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="orderNo != null" >
-        #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="payMode != null" >
-        #{payMode,jdbcType=INTEGER},
-      </if>
-      <if test="totalAmount != null" >
-        #{totalAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="clientIp != null" >
-        #{clientIp,jdbcType=VARCHAR},
-      </if>
-      <if test="device != null" >
-        #{device,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null" >
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="detail != null" >
-        #{detail,jdbcType=VARCHAR},
-      </if>
-      <if test="extra != null" >
-        #{extra,jdbcType=VARCHAR},
-      </if>
-      <if test="errCode != null" >
-        #{errCode,jdbcType=VARCHAR},
-      </if>
-      <if test="errMsg != null" >
-        #{errMsg,jdbcType=VARCHAR},
-      </if>
-      <if test="notifyUrl != null" >
-        #{notifyUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="notifyCount != null" >
-        #{notifyCount,jdbcType=TINYINT},
-      </if>
-      <if test="lastNotifyTime != null" >
-        #{lastNotifyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="expireTime != null" >
-        #{expireTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="payTime != null" >
-        #{payTime,jdbcType=DECIMAL},
-      </if>
-      <if test="createTime != null" >
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="timeStamp != null" >
-        #{timeStamp,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.pay.dao.model.OrderPay" >
+    <insert id="insertSelective" parameterType="com.pay.dao.model.OrderPay" useGeneratedKeys="true" keyProperty="id">
+        insert into order_pay
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="orderNo != null">
+                ORDER_NO,
+            </if>
+            <if test="payMode != null">
+                PAY_MODE,
+            </if>
+            <if test="totalAmount != null">
+                TOTAL_AMOUNT,
+            </if>
+            <if test="status != null">
+                STATUS,
+            </if>
+            <if test="clientIp != null">
+                CLIENT_IP,
+            </if>
+            <if test="device != null">
+                DEVICE,
+            </if>
+            <if test="title != null">
+                TITLE,
+            </if>
+            <if test="detail != null">
+                DETAIL,
+            </if>
+            <if test="extra != null">
+                EXTRA,
+            </if>
+            <if test="errCode != null">
+                ERR_CODE,
+            </if>
+            <if test="errMsg != null">
+                ERR_MSG,
+            </if>
+            <if test="notifyUrl != null">
+                NOTIFY_URL,
+            </if>
+            <if test="notifyCount != null">
+                NOTIFY_COUNT,
+            </if>
+            <if test="lastNotifyTime != null">
+                LAST_NOTIFY_TIME,
+            </if>
+            <if test="expireTime != null">
+                EXPIRE_TIME,
+            </if>
+            <if test="payTime != null">
+                PAY_TIME,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="timeStamp != null">
+                TIME_STAMP,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payMode != null">
+                #{payMode,jdbcType=INTEGER},
+            </if>
+            <if test="totalAmount != null">
+                #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="clientIp != null">
+                #{clientIp,jdbcType=VARCHAR},
+            </if>
+            <if test="device != null">
+                #{device,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="detail != null">
+                #{detail,jdbcType=VARCHAR},
+            </if>
+            <if test="extra != null">
+                #{extra,jdbcType=VARCHAR},
+            </if>
+            <if test="errCode != null">
+                #{errCode,jdbcType=VARCHAR},
+            </if>
+            <if test="errMsg != null">
+                #{errMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="notifyUrl != null">
+                #{notifyUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="notifyCount != null">
+                #{notifyCount,jdbcType=TINYINT},
+            </if>
+            <if test="lastNotifyTime != null">
+                #{lastNotifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expireTime != null">
+                #{expireTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payTime != null">
+                #{payTime,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeStamp != null">
+                #{timeStamp,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.pay.dao.model.OrderPay">
+        update order_pay
+        <set>
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="orderNo != null">
+                ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payMode != null">
+                PAY_MODE = #{payMode,jdbcType=INTEGER},
+            </if>
+            <if test="totalAmount != null">
+                TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="clientIp != null">
+                CLIENT_IP = #{clientIp,jdbcType=VARCHAR},
+            </if>
+            <if test="device != null">
+                DEVICE = #{device,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                TITLE = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="detail != null">
+                DETAIL = #{detail,jdbcType=VARCHAR},
+            </if>
+            <if test="extra != null">
+                EXTRA = #{extra,jdbcType=VARCHAR},
+            </if>
+            <if test="errCode != null">
+                ERR_CODE = #{errCode,jdbcType=VARCHAR},
+            </if>
+            <if test="errMsg != null">
+                ERR_MSG = #{errMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="notifyUrl != null">
+                NOTIFY_URL = #{notifyUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="notifyCount != null">
+                NOTIFY_COUNT = #{notifyCount,jdbcType=TINYINT},
+            </if>
+            <if test="lastNotifyTime != null">
+                LAST_NOTIFY_TIME = #{lastNotifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expireTime != null">
+                EXPIRE_TIME = #{expireTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="payTime != null">
+                PAY_TIME = #{payTime,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeStamp != null">
+                TIME_STAMP = #{timeStamp,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.pay.dao.model.OrderPay">
     update order_pay
-    <set >
-      <if test="orderNo != null" >
-        ORDER_NO = #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="payMode != null" >
-        PAY_MODE = #{payMode,jdbcType=INTEGER},
-      </if>
-      <if test="totalAmount != null" >
-        TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
-      </if>
-      <if test="status != null" >
-        STATUS = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="clientIp != null" >
-        CLIENT_IP = #{clientIp,jdbcType=VARCHAR},
-      </if>
-      <if test="device != null" >
-        DEVICE = #{device,jdbcType=VARCHAR},
-      </if>
-      <if test="title != null" >
-        TITLE = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="detail != null" >
-        DETAIL = #{detail,jdbcType=VARCHAR},
-      </if>
-      <if test="extra != null" >
-        EXTRA = #{extra,jdbcType=VARCHAR},
-      </if>
-      <if test="errCode != null" >
-        ERR_CODE = #{errCode,jdbcType=VARCHAR},
-      </if>
-      <if test="errMsg != null" >
-        ERR_MSG = #{errMsg,jdbcType=VARCHAR},
-      </if>
-      <if test="notifyUrl != null" >
-        NOTIFY_URL = #{notifyUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="notifyCount != null" >
-        NOTIFY_COUNT = #{notifyCount,jdbcType=TINYINT},
-      </if>
-      <if test="lastNotifyTime != null" >
-        LAST_NOTIFY_TIME = #{lastNotifyTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="expireTime != null" >
-        EXPIRE_TIME = #{expireTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="payTime != null" >
-        PAY_TIME = #{payTime,jdbcType=DECIMAL},
-      </if>
-      <if test="createTime != null" >
-        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="timeStamp != null" >
-        TIME_STAMP = #{timeStamp,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where ID = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.pay.dao.model.OrderPay" >
-    update order_pay
-    set ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+    set USER_ID = #{userId,jdbcType=BIGINT},
+      ORDER_NO = #{orderNo,jdbcType=VARCHAR},
       PAY_MODE = #{payMode,jdbcType=INTEGER},
       TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
       STATUS = #{status,jdbcType=INTEGER},

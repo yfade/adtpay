@@ -1,6 +1,6 @@
-package com.pay.wxsdk;
+package com.pay.wx;
 
-import com.pay.wxsdk.WXPayConstants.SignType;
+import com.pay.wx.WXPayConstants.SignType;
 
 import java.util.HashMap;
 import java.util.Map;

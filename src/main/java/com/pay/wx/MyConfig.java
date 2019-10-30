@@ -1,8 +1,6 @@
-package com.pay.wxsdk;
+package com.pay.wx;
 
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class MyConfig extends WXPayConfig {

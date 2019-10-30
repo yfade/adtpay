@@ -13,6 +13,8 @@ public class Process {
 
     private Long orderId;
 
+    private String orderNo;
+
     private Date operateTime;
 
     private Integer status;
@@ -59,6 +61,14 @@ public class Process {
 
     public void setOrderId(Long orderId) {
         this.orderId = orderId;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo == null ? null : orderNo.trim();
     }
 
     public Date getOperateTime() {

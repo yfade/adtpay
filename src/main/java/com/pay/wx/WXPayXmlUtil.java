@@ -1,4 +1,4 @@
-package com.pay.wxsdk;
+package com.pay.wx;
 
 import org.w3c.dom.Document;
 

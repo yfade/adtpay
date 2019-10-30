@@ -7,11 +7,12 @@ import com.pay.dao.model.Goods;
 import com.pay.dao.model.Order;
 import com.pay.dao.model.OrderSub;
 import com.pay.dao.vo.OrderVo;
+import com.pay.dao.vo.serviceVo.AliPayOrder;
 import com.pay.dao.vo.serviceVo.WxPayOrder;
 import com.pay.enums.FeeTypeConstant;
 import com.pay.enums.StatusEnum;
 import com.pay.enums.SystemEnum;
-import com.pay.enums.WxPayConstant;
+import com.pay.enums.PayConstant;
 import com.pay.service.GoodsService;
 import com.pay.service.OrderService;
 import com.pay.service.PayService;
@@ -130,7 +131,6 @@ public class PayController {
         if (orderVo == null) {
             return ResultMsg.fail();
         }
-
         try {
             WxPayOrder wxPayOrder = new WxPayOrder();
             wxPayOrder.setBody(SystemEnum.QTCAPP.getMsg() + orderVo.getGoodsName());
@@ -138,10 +138,46 @@ public class PayController {
             wxPayOrder.setDeviceInfo((String) data.get("deviceInfo"));
             wxPayOrder.setFeeType(FeeTypeConstant.CNY);
             wxPayOrder.setTotalFee(orderVo.getTotalAmount().multiply(new BigDecimal(100)).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-            wxPayOrder.setSpbillCreateIp(IpUtil.getIp(request));
+//            wxPayOrder.setSpbillCreateIp(IpUtil.getIp(request));
+            wxPayOrder.setSpbillCreateIp("127.0.0.1");
             wxPayOrder.setNotifyUrl("http://www.example.com/wxpay/notify");
-            wxPayOrder.setTradeType(WxPayConstant.WX_NATIVE);
+            wxPayOrder.setTradeType(PayConstant.WX_NATIVE);
+
+            wxPayOrder.setUserId(orderVo.getUserId());
+            wxPayOrder.setUserName(orderVo.getUserName());
             return payService.payOrder(wxPayOrder);
+        } catch (Exception e) {
+            logger.error("PayController payOrder error:", e);
+            return ResultMsg.fail();
+        }
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/payOrderAli", method = RequestMethod.POST)
+    public ResultMsg payOrderAli(@RequestBody JSONObject data, HttpServletRequest request) {
+        String id = (String) data.get("id");
+        if (StringUtils.isBlank(id)) {
+            return ResultMsg.fail(ResultEnum.PARAM_MISS_ERROR);
+        }
+
+        OrderVo orderVo = orderService.selectOrderDetail(Long.valueOf(id));
+        if (orderVo == null) {
+            return ResultMsg.fail();
+        }
+        try {
+            AliPayOrder aliPayOrder = new AliPayOrder();
+            aliPayOrder.setSubject(orderVo.getGoodsName());
+            aliPayOrder.setBody(orderVo.getDescription());
+            aliPayOrder.setOutTradeNo(orderVo.getOrderNo());
+            aliPayOrder.setTimeoutExpress("30m");
+            aliPayOrder.setTotalAmount(orderVo.getTotalAmount());
+            aliPayOrder.setNotifyUrl("http://www.example.com/wxpay/notify");
+            aliPayOrder.setTradeType(PayConstant.ALI_APP);
+
+            aliPayOrder.setUserId(orderVo.getUserId());
+            aliPayOrder.setUserName(orderVo.getUserName());
+
+            return payService.payOrder(aliPayOrder);
         } catch (Exception e) {
             logger.error("PayController payOrder error:", e);
             return ResultMsg.fail();

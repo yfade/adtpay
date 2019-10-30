@@ -1,4 +1,4 @@
-package com.pay.wxsdk;
+package com.pay.wx;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

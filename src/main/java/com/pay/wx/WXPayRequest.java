@@ -1,4 +1,4 @@
-package com.pay.wxsdk;
+package com.pay.wx;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -24,7 +24,7 @@ import java.net.UnknownHostException;
 import java.security.KeyStore;
 import java.security.SecureRandom;
 
-import static com.pay.wxsdk.WXPayConstants.USER_AGENT;
+import static com.pay.wx.WXPayConstants.USER_AGENT;
 
 public class WXPayRequest {
     private WXPayConfig config;

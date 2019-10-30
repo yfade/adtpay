@@ -1,4 +1,4 @@
-package com.pay.wxsdk;
+package com.pay.wx;
 
 /**
  * 域名管理，实现主备域名自动切换

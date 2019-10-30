@@ -32,6 +32,8 @@ public class OrderVo {
 
     private String remark;
 
+    private String description;
+
     private Long createUserId;
 
     private String createUserName;
@@ -292,5 +294,13 @@ public class OrderVo {
 
     public void setAttach(String attach) {
         this.attach = attach;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

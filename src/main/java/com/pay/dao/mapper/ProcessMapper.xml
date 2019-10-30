@@ -1,138 +1,149 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.pay.dao.mapper.ProcessMapper">
-    <resultMap id="BaseResultMap" type="com.pay.dao.model.Process">
-        <id column="ID" property="id" jdbcType="BIGINT"/>
-        <result column="OPERATOR_USER_ID" property="operatorUserId" jdbcType="BIGINT"/>
-        <result column="OPERATOR_USER_NAME" property="operatorUserName" jdbcType="VARCHAR"/>
-        <result column="REQUIREMENT_ID" property="requirementId" jdbcType="BIGINT"/>
-        <result column="ORDER_ID" property="orderId" jdbcType="BIGINT"/>
-        <result column="OPERATE_TIME" property="operateTime" jdbcType="TIMESTAMP"/>
-        <result column="STATUS" property="status" jdbcType="INTEGER"/>
-        <result column="DESCRIPTION" property="description" jdbcType="VARCHAR"/>
-        <result column="TIME_STAMP" property="timeStamp" jdbcType="TIMESTAMP"/>
-    </resultMap>
-    <sql id="Base_Column_List">
-    ID, OPERATOR_USER_ID, OPERATOR_USER_NAME, REQUIREMENT_ID, ORDER_ID, OPERATE_TIME, 
+<mapper namespace="com.pay.dao.mapper.ProcessMapper" >
+  <resultMap id="BaseResultMap" type="com.pay.dao.model.Process" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="OPERATOR_USER_ID" property="operatorUserId" jdbcType="BIGINT" />
+    <result column="OPERATOR_USER_NAME" property="operatorUserName" jdbcType="VARCHAR" />
+    <result column="REQUIREMENT_ID" property="requirementId" jdbcType="BIGINT" />
+    <result column="ORDER_ID" property="orderId" jdbcType="BIGINT" />
+    <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR" />
+    <result column="OPERATE_TIME" property="operateTime" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="TIME_STAMP" property="timeStamp" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, OPERATOR_USER_ID, OPERATOR_USER_NAME, REQUIREMENT_ID, ORDER_ID, ORDER_NO, OPERATE_TIME, 
     STATUS, DESCRIPTION, TIME_STAMP
   </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
-        select
-        <include refid="Base_Column_List"/>
-        from process
-        where ID = #{id,jdbcType=BIGINT}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from process
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from process
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.pay.dao.model.Process">
+  <insert id="insert" parameterType="com.pay.dao.model.Process" >
     insert into process (ID, OPERATOR_USER_ID, OPERATOR_USER_NAME, 
-      REQUIREMENT_ID, ORDER_ID, OPERATE_TIME, 
-      STATUS, DESCRIPTION, TIME_STAMP
-      )
+      REQUIREMENT_ID, ORDER_ID, ORDER_NO, 
+      OPERATE_TIME, STATUS, DESCRIPTION, 
+      TIME_STAMP)
     values (#{id,jdbcType=BIGINT}, #{operatorUserId,jdbcType=BIGINT}, #{operatorUserName,jdbcType=VARCHAR}, 
-      #{requirementId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{operateTime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{timeStamp,jdbcType=TIMESTAMP}
-      )
+      #{requirementId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, 
+      #{operateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
+      #{timeStamp,jdbcType=TIMESTAMP})
   </insert>
-    <insert id="insertSelective" parameterType="com.pay.dao.model.Process">
-        insert into process
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                ID,
-            </if>
-            <if test="operatorUserId != null">
-                OPERATOR_USER_ID,
-            </if>
-            <if test="operatorUserName != null">
-                OPERATOR_USER_NAME,
-            </if>
-            <if test="requirementId != null">
-                REQUIREMENT_ID,
-            </if>
-            <if test="orderId != null">
-                ORDER_ID,
-            </if>
-            <if test="operateTime != null">
-                OPERATE_TIME,
-            </if>
-            <if test="status != null">
-                STATUS,
-            </if>
-            <if test="description != null">
-                DESCRIPTION,
-            </if>
-            <if test="timeStamp != null">
-                TIME_STAMP,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=BIGINT},
-            </if>
-            <if test="operatorUserId != null">
-                #{operatorUserId,jdbcType=BIGINT},
-            </if>
-            <if test="operatorUserName != null">
-                #{operatorUserName,jdbcType=VARCHAR},
-            </if>
-            <if test="requirementId != null">
-                #{requirementId,jdbcType=BIGINT},
-            </if>
-            <if test="orderId != null">
-                #{orderId,jdbcType=BIGINT},
-            </if>
-            <if test="operateTime != null">
-                #{operateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="status != null">
-                #{status,jdbcType=INTEGER},
-            </if>
-            <if test="description != null">
-                #{description,jdbcType=VARCHAR},
-            </if>
-            <if test="timeStamp != null">
-                #{timeStamp,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.pay.dao.model.Process">
-        update process
-        <set>
-            <if test="operatorUserId != null">
-                OPERATOR_USER_ID = #{operatorUserId,jdbcType=BIGINT},
-            </if>
-            <if test="operatorUserName != null">
-                OPERATOR_USER_NAME = #{operatorUserName,jdbcType=VARCHAR},
-            </if>
-            <if test="requirementId != null">
-                REQUIREMENT_ID = #{requirementId,jdbcType=BIGINT},
-            </if>
-            <if test="orderId != null">
-                ORDER_ID = #{orderId,jdbcType=BIGINT},
-            </if>
-            <if test="operateTime != null">
-                OPERATE_TIME = #{operateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="status != null">
-                STATUS = #{status,jdbcType=INTEGER},
-            </if>
-            <if test="description != null">
-                DESCRIPTION = #{description,jdbcType=VARCHAR},
-            </if>
-            <if test="timeStamp != null">
-                TIME_STAMP = #{timeStamp,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where ID = #{id,jdbcType=BIGINT}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.pay.dao.model.Process">
+  <insert id="insertSelective" parameterType="com.pay.dao.model.Process" >
+    insert into process
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="operatorUserId != null" >
+        OPERATOR_USER_ID,
+      </if>
+      <if test="operatorUserName != null" >
+        OPERATOR_USER_NAME,
+      </if>
+      <if test="requirementId != null" >
+        REQUIREMENT_ID,
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID,
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO,
+      </if>
+      <if test="operateTime != null" >
+        OPERATE_TIME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="description != null" >
+        DESCRIPTION,
+      </if>
+      <if test="timeStamp != null" >
+        TIME_STAMP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="operatorUserId != null" >
+        #{operatorUserId,jdbcType=BIGINT},
+      </if>
+      <if test="operatorUserName != null" >
+        #{operatorUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="requirementId != null" >
+        #{requirementId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="timeStamp != null" >
+        #{timeStamp,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pay.dao.model.Process" >
+    update process
+    <set >
+      <if test="operatorUserId != null" >
+        OPERATOR_USER_ID = #{operatorUserId,jdbcType=BIGINT},
+      </if>
+      <if test="operatorUserName != null" >
+        OPERATOR_USER_NAME = #{operatorUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="requirementId != null" >
+        REQUIREMENT_ID = #{requirementId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        ORDER_ID = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null" >
+        ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="operateTime != null" >
+        OPERATE_TIME = #{operateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        DESCRIPTION = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="timeStamp != null" >
+        TIME_STAMP = #{timeStamp,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pay.dao.model.Process" >
     update process
     set OPERATOR_USER_ID = #{operatorUserId,jdbcType=BIGINT},
       OPERATOR_USER_NAME = #{operatorUserName,jdbcType=VARCHAR},
       REQUIREMENT_ID = #{requirementId,jdbcType=BIGINT},
       ORDER_ID = #{orderId,jdbcType=BIGINT},
+      ORDER_NO = #{orderNo,jdbcType=VARCHAR},
       OPERATE_TIME = #{operateTime,jdbcType=TIMESTAMP},
       STATUS = #{status,jdbcType=INTEGER},
       DESCRIPTION = #{description,jdbcType=VARCHAR},

@@ -6,6 +6,8 @@ import java.util.Date;
 public class OrderPay {
     private Long id;
 
+    private Long userId;
+
     private String orderNo;
 
     private Integer payMode;
@@ -48,6 +50,14 @@ public class OrderPay {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getOrderNo() {

@@ -19,14 +19,14 @@
         <result column="NOTIFY_COUNT" property="notifyCount" jdbcType="TINYINT"/>
         <result column="LAST_NOTIFY_TIME" property="lastNotifyTime" jdbcType="TIMESTAMP"/>
         <result column="EXPIRE_TIME" property="expireTime" jdbcType="TIMESTAMP"/>
-        <result column="PAY_TIME" property="payTime" jdbcType="DECIMAL"/>
+        <result column="PAY_SUCCESS_TIME" property="paySuccessTime" jdbcType="TIMESTAMP"/>
         <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP"/>
         <result column="TIME_STAMP" property="timeStamp" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
     ID, USER_ID, ORDER_NO, PAY_MODE, TOTAL_AMOUNT, STATUS, CLIENT_IP, DEVICE, TITLE, 
     DETAIL, EXTRA, ERR_CODE, ERR_MSG, NOTIFY_URL, NOTIFY_COUNT, LAST_NOTIFY_TIME, EXPIRE_TIME, 
-    PAY_TIME, CREATE_TIME, TIME_STAMP
+    PAY_SUCCESS_TIME, CREATE_TIME, TIME_STAMP
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
         select
@@ -44,14 +44,14 @@
       CLIENT_IP, DEVICE, TITLE, 
       DETAIL, EXTRA, ERR_CODE, 
       ERR_MSG, NOTIFY_URL, NOTIFY_COUNT, 
-      LAST_NOTIFY_TIME, EXPIRE_TIME, PAY_TIME, 
+      LAST_NOTIFY_TIME, EXPIRE_TIME, PAY_SUCCESS_TIME, 
       CREATE_TIME, TIME_STAMP)
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, 
       #{payMode,jdbcType=INTEGER}, #{totalAmount,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, 
       #{clientIp,jdbcType=VARCHAR}, #{device,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{detail,jdbcType=VARCHAR}, #{extra,jdbcType=VARCHAR}, #{errCode,jdbcType=VARCHAR}, 
       #{errMsg,jdbcType=VARCHAR}, #{notifyUrl,jdbcType=VARCHAR}, #{notifyCount,jdbcType=TINYINT}, 
-      #{lastNotifyTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP}, #{payTime,jdbcType=DECIMAL}, 
+      #{lastNotifyTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP}, #{paySuccessTime,jdbcType=TIMESTAMP},
       #{createTime,jdbcType=TIMESTAMP}, #{timeStamp,jdbcType=TIMESTAMP})
   </insert>
     <insert id="insertSelective" parameterType="com.pay.dao.model.OrderPay" useGeneratedKeys="true" keyProperty="id">
@@ -108,8 +108,8 @@
             <if test="expireTime != null">
                 EXPIRE_TIME,
             </if>
-            <if test="payTime != null">
-                PAY_TIME,
+            <if test="paySuccessTime != null">
+                PAY_SUCCESS_TIME,
             </if>
             <if test="createTime != null">
                 CREATE_TIME,
@@ -170,8 +170,8 @@
             <if test="expireTime != null">
                 #{expireTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="payTime != null">
-                #{payTime,jdbcType=DECIMAL},
+            <if test="paySuccessTime != null">
+                #{paySuccessTime,jdbcType=TIMESTAMP},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
@@ -232,8 +232,8 @@
             <if test="expireTime != null">
                 EXPIRE_TIME = #{expireTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="payTime != null">
-                PAY_TIME = #{payTime,jdbcType=DECIMAL},
+            <if test="paySuccessTime != null">
+                PAY_SUCCESS_TIME = #{paySuccessTime,jdbcType=TIMESTAMP},
             </if>
             <if test="createTime != null">
                 CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
@@ -262,9 +262,65 @@
       NOTIFY_COUNT = #{notifyCount,jdbcType=TINYINT},
       LAST_NOTIFY_TIME = #{lastNotifyTime,jdbcType=TIMESTAMP},
       EXPIRE_TIME = #{expireTime,jdbcType=TIMESTAMP},
-      PAY_TIME = #{payTime,jdbcType=DECIMAL},
+      PAY_SUCCESS_TIME = #{paySuccessTime,jdbcType=TIMESTAMP},
       CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
       TIME_STAMP = #{timeStamp,jdbcType=TIMESTAMP}
     where ID = #{id,jdbcType=BIGINT}
   </update>
+
+    <update id="updateByNotify" parameterType="com.pay.dao.model.OrderPay">
+        update order_pay
+        <set>
+            NOTIFY_COUNT = NOTIFY_COUNT+1,
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="orderNo != null">
+                ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payMode != null">
+                PAY_MODE = #{payMode,jdbcType=INTEGER},
+            </if>
+            <if test="totalAmount != null">
+                TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                STATUS = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="clientIp != null">
+                CLIENT_IP = #{clientIp,jdbcType=VARCHAR},
+            </if>
+            <if test="device != null">
+                DEVICE = #{device,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                TITLE = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="detail != null">
+                DETAIL = #{detail,jdbcType=VARCHAR},
+            </if>
+            <if test="extra != null">
+                EXTRA = #{extra,jdbcType=VARCHAR},
+            </if>
+            <if test="errCode != null">
+                ERR_CODE = #{errCode,jdbcType=VARCHAR},
+            </if>
+            <if test="errMsg != null">
+                ERR_MSG = #{errMsg,jdbcType=VARCHAR},
+            </if>
+            <if test="notifyUrl != null">
+                NOTIFY_URL = #{notifyUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="lastNotifyTime != null">
+                LAST_NOTIFY_TIME = #{lastNotifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expireTime != null">
+                EXPIRE_TIME = #{expireTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="paySuccessTime != null">
+                PAY_SUCCESS_TIME = #{paySuccessTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

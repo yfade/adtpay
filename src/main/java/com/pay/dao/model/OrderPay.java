@@ -38,7 +38,7 @@ public class OrderPay {
 
     private Date expireTime;
 
-    private Long payTime;
+    private Date paySuccessTime;
 
     private Date createTime;
 
@@ -180,13 +180,6 @@ public class OrderPay {
         this.expireTime = expireTime;
     }
 
-    public Long getPayTime() {
-        return payTime;
-    }
-
-    public void setPayTime(Long payTime) {
-        this.payTime = payTime;
-    }
 
     public Date getCreateTime() {
         return createTime;
@@ -202,5 +195,13 @@ public class OrderPay {
 
     public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
+    }
+
+    public Date getPaySuccessTime() {
+        return paySuccessTime;
+    }
+
+    public void setPaySuccessTime(Date paySuccessTime) {
+        this.paySuccessTime = paySuccessTime;
     }
 }

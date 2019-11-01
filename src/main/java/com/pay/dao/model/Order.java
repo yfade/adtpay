@@ -26,6 +26,8 @@ public class Order {
 
     private Integer sysSource;
 
+    private Date paySuccessTime;
+
     private Date finishTime;
 
     private Date cancelTime;
@@ -192,5 +194,13 @@ public class Order {
 
     public void setThirdOrderNo(String thirdOrderNo) {
         this.thirdOrderNo = thirdOrderNo;
+    }
+
+    public Date getPaySuccessTime() {
+        return paySuccessTime;
+    }
+
+    public void setPaySuccessTime(Date paySuccessTime) {
+        this.paySuccessTime = paySuccessTime;
     }
 }

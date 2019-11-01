@@ -1,6 +1,8 @@
 package com.pay.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.alipay.api.internal.util.AlipaySignature;
+import com.pay.ali.AliDevPayConfig;
 import com.pay.common.ResultEnum;
 import com.pay.common.ResultMsg;
 import com.pay.dao.model.Goods;
@@ -17,6 +19,9 @@ import com.pay.service.GoodsService;
 import com.pay.service.OrderService;
 import com.pay.service.PayService;
 import com.pay.util.OrderNoGenerator;
+import com.pay.wx.MyConfig;
+import com.pay.wx.WXPay;
+import com.pay.wx.WXPayUtil;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -31,6 +36,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/pay")
@@ -186,19 +194,186 @@ public class PayController {
         }
     }
 
+    /**
+     * 微信支付异步通知
+     *
+     * @param request
+     * @return
+     */
     @RequestMapping("/wxNotify")
     public String wxNotify(HttpServletRequest request) {
+        String result = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>" + "<return_msg><![CDATA[报文为空]]></return_msg>" + "</xml> ";
         try {
-            String xmlResult = IOUtils.toString(request.getInputStream(), request.getCharacterEncoding());
+            String notifyXml = IOUtils.toString(request.getInputStream(), request.getCharacterEncoding());
+            Map<String, String> notifyMap = WXPayUtil.xmlToMap(notifyXml);
 
-            return null;
+            MyConfig config = new MyConfig();
+            WXPay wxpay = new WXPay(config);
+            // 校验签名
+            if (wxpay.isPayResultNotifySignatureValid(notifyMap)) {
+                if (!PayConstant.SUCCESS.equals(notifyMap.get(PayConstant.RETURN_CODE))) {
+                    logger.error("wxNotify returnCode={}", notifyMap.get(PayConstant.RETURN_CODE));
+                    return result;
+                }
+                String outTradeNo = notifyMap.get("out_trade_no");
+                Order order = orderService.selectOrderByOrderNo(outTradeNo);
+                // 校验订单金额、状态信息
+                if (!wxVerifyOrder(order, notifyMap)) {
+                    logger.error("wxNotify wxVerifyOrder fail, orderNo={}", outTradeNo);
+                    return result;
+                }
+                // 如果订单已处理过，则直接返回success
+                if (order.getStatus() >= StatusEnum.PAY_SUCCESS.getCode()) {
+                    logger.error("wxNotify order status already is " + order.getStatus());
+                    result = "<xml>\n" + "  <return_code><![CDATA[SUCCESS]]></return_code>\n" + "  <return_msg><![CDATA[OK]]></return_msg>\n" + "</xml>";
+                    return result;
+                }
+
+                if (PayConstant.SUCCESS.equals(notifyMap.get(PayConstant.RESULT_CODE))) {
+                    // 支付成功，修改订单状态
+                    orderService.updateSuccessByWxNotify(order.getId(), notifyMap);
+                    result = "<xml>\n" + "  <return_code><![CDATA[SUCCESS]]></return_code>\n" + "  <return_msg><![CDATA[OK]]></return_msg>\n" + "</xml>";
+                } else {
+                    //支付失败，修改订单状态
+                    logger.error("wxNotify resultCode={}", notifyMap.get(PayConstant.RESULT_CODE));
+                    orderService.updateFailByWxNotify(order.getId(), notifyMap);
+                }
+            } else {
+                // 签名错误，如果数据里没有sign字段，也认为是签名错误
+                logger.error("wxNotify sign error");
+            }
         } catch (Exception e) {
-            System.out.println("微信手机支付失败:" + e.getMessage());
-            String result = "<xml>" + "<return_code><![CDATA[FAIL]]></return_code>" + "<return_msg><![CDATA[报文为空]]></return_msg>" + "</xml> ";
-            return result;
+            logger.error("wxNotify error:", e);
         }
+        return result;
     }
 
+    /**
+     * 支付宝支付异步通知
+     *
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/aliNotify", method = RequestMethod.POST)
+    public String aliNotify(HttpServletRequest request) {
+        // 提取参数
+        Map<String, String> params = getAliNotifyParams(request);
+        String result = "fail";
+        try {
+            boolean flag = AlipaySignature.rsaCheckV1(params, AliDevPayConfig.ALIPAY_PUBLIC_KEY, AliDevPayConfig.CHARSET, AliDevPayConfig.SIGNTYPE);
+            if (flag) {
+                String outTradeNo = params.get("out_trade_no");
+                String tradeStatue = params.get("trade_status");
+                Order order = orderService.selectOrderByOrderNo(outTradeNo);
+                // 校验订单金额、状态信息
+                if (!aliVerifyOrder(order, params)) {
+                    logger.error("aliNotify aliVerifyOrder fail, orderNo={}", outTradeNo);
+                    return result;
+                }
+                // 如果订单已处理过，则直接返回success
+                if (order.getStatus() >= StatusEnum.PAY_SUCCESS.getCode()) {
+                    logger.error("aliNotify order status already is " + order.getStatus());
+                    result = "success";
+                    return result;
+                }
+
+                if (tradeStatue.equals(PayConstant.TRADE_STATUS_SUCCESS) || tradeStatue.equals(PayConstant.TRADE_STATUS_FINISHED)) {
+                    orderService.updateSuccessByAliNotify(order.getId(), params);
+                    result = "success";
+                } else {
+                    //支付失败，修改订单状态
+                    logger.error("aliNotify tradeStatus={}", tradeStatue);
+                    orderService.updateFailByAliNotify(order.getId(), params);
+                }
+
+            } else {
+                // 签名错误
+                logger.error("aliNotify sign error");
+            }
+        } catch (Exception e) {
+            logger.error("aliNotify error:", e);
+        }
+        return result;
+    }
+
+    /**
+     * 获取支付宝支付异步通知参数
+     *
+     * @param request
+     * @return
+     */
+    private Map<String, String> getAliNotifyParams(HttpServletRequest request) {
+        Map<String, String> params = new HashMap<>();
+        Map requestParams = request.getParameterMap();
+        for (Iterator iter = requestParams.keySet().iterator(); iter.hasNext(); ) {
+            String name = (String) iter.next();
+            String[] values = (String[]) requestParams.get(name);
+            String valueStr = "";
+            for (int i = 0; i < values.length; i++) {
+                valueStr = (i == values.length - 1) ? valueStr + values[i]
+                        : valueStr + values[i] + ",";
+            }
+            //乱码解决，这段代码在出现乱码时使用。
+            //valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+            params.put(name, valueStr);
+        }
+        return params;
+    }
+
+    /**
+     * 支付宝异步通知验证订单信息
+     *
+     * @param order
+     * @param params
+     * @return
+     */
+    private boolean aliVerifyOrder(Order order, Map<String, String> params) {
+        String outTradeNo = params.get("out_trade_no");
+        // 1、商户需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号，
+        if (order == null) {
+            logger.error("wxNotify order is null " + outTradeNo);
+            return false;
+        }
+
+        // 2、判断total_amount是否确实为该订单的实际金额（即商户订单创建时的金额），
+        BigDecimal totalAmount = order.getTotalAmount().setScale(2, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100));
+        if (totalAmount.compareTo(new BigDecimal(params.get("total_amount"))) == 0) {
+            logger.error("wxNotify totalFee not equal " + outTradeNo);
+            return false;
+        }
+
+        // 3、校验通知中的seller_id（或者seller_email)是否为out_trade_no这笔单据的对应的操作方（有的时候，一个商户可能有多个seller_id/seller_email），
+        // 第三步可根据实际情况省略
+
+        // 4、验证app_id是否为该商户本身。
+        if (!params.get("app_id").equals(AliDevPayConfig.APPID)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 微信异步通知验证订单信息
+     *
+     * @param order
+     * @param notifyMap
+     * @return
+     */
+    private boolean wxVerifyOrder(Order order, Map<String, String> notifyMap) {
+        String outTradeNo = notifyMap.get("out_trade_no");
+        // 验证订单号
+        if (order == null) {
+            logger.error("wxNotify order is null " + outTradeNo);
+            return false;
+        }
+        //验证订单金额是否一致
+        BigDecimal totalAmount = order.getTotalAmount().setScale(2, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100));
+        if (totalAmount.compareTo(new BigDecimal(notifyMap.get("total_fee"))) == 0) {
+            logger.error("wxNotify totalFee not equal " + outTradeNo);
+            return false;
+        }
+        return true;
+    }
 
     /**
      * 校验参数

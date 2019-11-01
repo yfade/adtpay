@@ -17,4 +17,7 @@ public interface OrderMapper {
     int updateByPrimaryKey(Order record);
 
     OrderVo selectOrderDetail(Long id);
+
+    Order selectOrderByOrderNo(String outTradeNo);
+
 }

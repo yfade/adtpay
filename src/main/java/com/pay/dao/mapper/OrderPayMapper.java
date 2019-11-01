@@ -14,4 +14,6 @@ public interface OrderPayMapper {
     int updateByPrimaryKeySelective(OrderPay record);
 
     int updateByPrimaryKey(OrderPay record);
+
+    int updateByNotify(OrderPay orderPay);
 }

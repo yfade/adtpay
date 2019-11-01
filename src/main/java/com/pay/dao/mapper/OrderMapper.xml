@@ -5,6 +5,7 @@
         <id column="ID" property="id" jdbcType="BIGINT"/>
         <result column="REQUIREMENT_ID" property="requirementId" jdbcType="BIGINT"/>
         <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR"/>
+        <result column="THIRD_ORDER_NO" property="thirdOrderNo" jdbcType="VARCHAR"/>
         <result column="PAY_MODE" property="payMode" jdbcType="INTEGER"/>
         <result column="USER_ID" property="userId" jdbcType="BIGINT"/>
         <result column="USER_NAME" property="userName" jdbcType="VARCHAR"/>
@@ -12,6 +13,7 @@
         <result column="STATUS" property="status" jdbcType="INTEGER"/>
         <result column="BIZ_TYPE" property="bizType" jdbcType="INTEGER"/>
         <result column="SYS_SOURCE" property="sysSource" jdbcType="INTEGER"/>
+        <result column="PAY_SUCCESS_TIME" property="paySuccessTime" jdbcType="TIMESTAMP"/>
         <result column="FINISH_TIME" property="finishTime" jdbcType="TIMESTAMP"/>
         <result column="CANCEL_TIME" property="cancelTime" jdbcType="TIMESTAMP"/>
         <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
@@ -199,6 +201,9 @@
             <if test="orderNo != null">
                 ORDER_NO = #{orderNo,jdbcType=VARCHAR},
             </if>
+            <if test="thirdOrderNo != null">
+                THIRD_ORDER_NO = #{thirdOrderNo,jdbcType=VARCHAR},
+            </if>
             <if test="payMode != null">
                 PAY_MODE = #{payMode,jdbcType=INTEGER},
             </if>
@@ -219,6 +224,9 @@
             </if>
             <if test="sysSource != null">
                 SYS_SOURCE = #{sysSource,jdbcType=INTEGER},
+            </if>
+            <if test="paySuccessTime != null">
+                PAY_SUCCESS_TIME = #{paySuccessTime,jdbcType=TIMESTAMP},
             </if>
             <if test="finishTime != null">
                 FINISH_TIME = #{finishTime,jdbcType=TIMESTAMP},
@@ -274,4 +282,10 @@
         LEFT JOIN order_sub os ON os.ORDER_ID=o.ID
         WHERE o.ID=#{id}
     </select>
+
+    <select id="selectOrderByOrderNo" parameterType="string" resultMap="BaseResultMap">
+        SELECT * FROM `order` WHERE ORDER_NO=#{orderNo}
+    </select>
+
+
 </mapper>

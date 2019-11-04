@@ -10,6 +10,7 @@ import com.pay.dao.model.Order;
 import com.pay.dao.model.OrderSub;
 import com.pay.dao.vo.OrderVo;
 import com.pay.dao.vo.serviceVo.AliPayOrder;
+import com.pay.dao.vo.serviceVo.BizModel;
 import com.pay.dao.vo.serviceVo.WxPayOrder;
 import com.pay.enums.FeeTypeConstant;
 import com.pay.enums.PayConstant;
@@ -152,8 +153,10 @@ public class PayController {
             wxPayOrder.setNotifyUrl("http://www.example.com/wxpay/notify");
             wxPayOrder.setTradeType(PayConstant.WX_NATIVE);
 
-            wxPayOrder.setUserId(orderVo.getUserId());
-            wxPayOrder.setUserName(orderVo.getUserName());
+            BizModel bizModel = new BizModel();
+            bizModel.setUserId(orderVo.getUserId());
+            bizModel.setUserName(orderVo.getUserName());
+            wxPayOrder.setBizModel(bizModel);
             return payService.payOrder(wxPayOrder);
         } catch (Exception e) {
             logger.error("PayController payOrder error:", e);
@@ -185,8 +188,10 @@ public class PayController {
             aliPayOrder.setSpbillCreateIp("127.0.0.1");
             aliPayOrder.setDeviceInfo((String) data.get("deviceInfo"));
 
-            aliPayOrder.setUserId(orderVo.getUserId());
-            aliPayOrder.setUserName(orderVo.getUserName());
+            BizModel bizModel = new BizModel();
+            bizModel.setUserId(orderVo.getUserId());
+            bizModel.setUserName(orderVo.getUserName());
+            aliPayOrder.setBizModel(bizModel);
 
             return payService.payOrder(aliPayOrder);
         } catch (Exception e) {
@@ -215,9 +220,13 @@ public class PayController {
             aliPayOrder.setBody(orderVo.getDescription());
             aliPayOrder.setTimeoutExpress("30m");
             aliPayOrder.setTradeType(PayConstant.ALI_PC);
+            aliPayOrder.setDeviceInfo("honor9");
+            aliPayOrder.setSpbillCreateIp("127.0.0.1");
 
-            aliPayOrder.setUserId(orderVo.getUserId());
-            aliPayOrder.setUserName(orderVo.getUserName());
+            BizModel bizModel = new BizModel();
+            bizModel.setUserId(orderVo.getUserId());
+            bizModel.setUserName(orderVo.getUserName());
+            aliPayOrder.setBizModel(bizModel);
             ResultMsg resultMsg = payService.payOrder(aliPayOrder);
             if (resultMsg.getCode() == 1) {
                 String result = resultMsg.getData().toString();

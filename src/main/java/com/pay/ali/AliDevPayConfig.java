@@ -35,8 +35,7 @@ public class AliDevPayConfig {
      * 5.页面跳转同步通知页面路径 需http://或者https://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问 商户可以自定义同步跳转地址
      */
     //这里同上..不做详细说明了..
-//    public static String RETURN_URL = "http://2hu4349021.wicp.vip/pay/returnUrl";
-    public static String RETURN_URL = "http://192.168.131.20:8080/aliNotify";
+    public static String RETURN_URL = "http://2hu4349021.wicp.vip/pay/returnUrl";
 
     /**
      * 正式环境支付宝网关，如果是沙箱环境需更改成https://openapi.alipaydev.com/gateway.do

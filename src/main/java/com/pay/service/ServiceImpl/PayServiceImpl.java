@@ -14,14 +14,11 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.pay.ali.AliDevPayConfig;
 import com.pay.common.ResultEnum;
 import com.pay.common.ResultMsg;
-import com.pay.dao.mapper.OrderPayMapper;
-import com.pay.dao.mapper.ProcessMapper;
-import com.pay.dao.model.OrderPay;
-import com.pay.dao.model.Process;
 import com.pay.dao.vo.serviceVo.AliPayOrder;
 import com.pay.dao.vo.serviceVo.PayOrder;
 import com.pay.dao.vo.serviceVo.WxPayOrder;
 import com.pay.enums.PayConstant;
+import com.pay.service.OrderPayService;
 import com.pay.service.PayService;
 import com.pay.wx.MyConfig;
 import com.pay.wx.WXPay;
@@ -34,18 +31,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
 public class PayServiceImpl implements PayService {
     private static final Logger logger = LoggerFactory.getLogger(PayServiceImpl.class);
+
     @Autowired
-    private OrderPayMapper orderPayMapper;
-    @Autowired
-    private ProcessMapper processMapper;
+    private OrderPayService orderPayService;
 
     @Override
     @Transactional
@@ -60,7 +54,10 @@ public class PayServiceImpl implements PayService {
             return resultMsg;
         }
 
-        // 2.下单
+        // 2.插入order_pay记录、日志
+        addPayOrder(payOrder);
+
+        // 3.下单
         resultMsg = ResultMsg.fail();
         switch (payOrder.getTradeType()) {
             case PayConstant.WX_APP:
@@ -75,14 +72,37 @@ public class PayServiceImpl implements PayService {
                 break;
         }
 
-        // 3.处理下单结果
+        // 4.处理下单结果
         if (resultMsg.getCode() == 1) {
             // 微信prepayId/支付宝签名 放入redis
 
         }
-        // 4.插入order_pay记录、日志
-        addPayOrder(payOrder, resultMsg.getCode());
         return resultMsg;
+    }
+
+    /**
+     * 插入order_pay记录、日志，并封装附加参数
+     *
+     * @param payOrder
+     */
+    private void addPayOrder(PayOrder payOrder) {
+        long id = orderPayService.insertOrderPayService(payOrder);
+        JSONObject object = new JSONObject();
+        object.put("orderPayId", id);
+        switch (payOrder.getTradeType()) {
+            case PayConstant.WX_APP:
+            case PayConstant.WX_NATIVE:
+                WxPayOrder wxPayOrder = (WxPayOrder) payOrder;
+                wxPayOrder.setAttach(object.toJSONString());
+                break;
+            case PayConstant.ALI_APP:
+            case PayConstant.ALI_PC:
+                AliPayOrder aliPayOrder = (AliPayOrder) payOrder;
+                aliPayOrder.setPassbackParams(object.toJSONString());
+                break;
+            default:
+                throw new RuntimeException("addPayOrder method tradeType not match:" + payOrder.getTradeType());
+        }
     }
 
     private ResultMsg getFromCache(PayOrder payOrder) {
@@ -163,63 +183,6 @@ public class PayServiceImpl implements PayService {
     }
 
     /**
-     * 插入order_pay记录
-     *
-     * @param payOrder
-     * @return
-     */
-    private OrderPay addPayOrder(PayOrder payOrder, int status) {
-        OrderPay orderPay = new OrderPay();
-        switch (payOrder.getTradeType()) {
-            case PayConstant.WX_APP:
-            case PayConstant.WX_NATIVE: {
-                WxPayOrder wxPayOrder = (WxPayOrder) payOrder;
-                orderPay.setOrderNo(wxPayOrder.getOutTradeNo());
-                orderPay.setUserId(wxPayOrder.getUserId());
-                orderPay.setPayMode(0);
-                orderPay.setTotalAmount(new BigDecimal(wxPayOrder.getTotalFee()).divide(new BigDecimal(100), 2));
-                orderPay.setStatus(status);
-                orderPay.setClientIp(wxPayOrder.getSpbillCreateIp());
-                orderPay.setDevice(wxPayOrder.getDeviceInfo());
-                orderPay.setTitle(wxPayOrder.getBody());
-                orderPay.setCreateTime(new Date());
-                break;
-            }
-            case PayConstant.ALI_APP:
-            case PayConstant.ALI_PC: {
-                AliPayOrder aliPayOrder = (AliPayOrder) payOrder;
-                orderPay.setOrderNo(aliPayOrder.getOutTradeNo());
-                orderPay.setUserId(aliPayOrder.getUserId());
-                orderPay.setPayMode(1);
-                orderPay.setTotalAmount(aliPayOrder.getTotalAmount());
-                orderPay.setStatus(status);
-                orderPay.setClientIp(aliPayOrder.getSpbillCreateIp());
-                orderPay.setDevice(aliPayOrder.getDeviceInfo());
-                orderPay.setTitle(aliPayOrder.getSubject());
-                orderPay.setCreateTime(new Date());
-                break;
-            }
-            default:
-                throw new RuntimeException("支付类型异常");
-        }
-        orderPayMapper.insertSelective(orderPay);
-
-        // 插入日志
-        Process process = new Process();
-        process.setOperatorUserId(payOrder.getUserId());
-        process.setOperatorUserName(payOrder.getUserName());
-        process.setOperateTime(orderPay.getCreateTime());
-        process.setOrderNo(payOrder.getOutTradeNo());
-        if (status == 1) {
-            process.setDescription(payOrder.getTradeType() + "-预下单成功");
-        } else {
-            process.setDescription(payOrder.getTradeType() + "-预下单失败");
-        }
-        processMapper.insertSelective(process);
-        return orderPay;
-    }
-
-    /**
      * 封装微信支付返回数据
      *
      * @param response
@@ -274,8 +237,7 @@ public class PayServiceImpl implements PayService {
         }
         Map<String, String> map = JSONObject.parseObject(reqJson, Map.class);
         map.put("trade_type", map.get("trade_type").substring(3));
-        map.remove("user_id");
-        map.remove("user_name");
+        map.remove("biz_model");
         return map;
     }
 
@@ -298,9 +260,11 @@ public class PayServiceImpl implements PayService {
             throw new RuntimeException(e);
         }
         JSONObject jsonObject = JSONObject.parseObject(reqJson);
-        jsonObject.remove("user_id");
-        jsonObject.remove("user_name");
-        System.out.println(jsonObject.toJSONString());
+        jsonObject.remove("biz_model");
+        jsonObject.remove("trade_type");
+        jsonObject.remove("spbill_create_ip");
+        jsonObject.remove("device_info");
+        System.out.println("pc pay=" + jsonObject.toJSONString());
         return jsonObject.toJSONString();
     }
 

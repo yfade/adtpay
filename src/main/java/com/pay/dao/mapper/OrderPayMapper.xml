@@ -5,7 +5,7 @@
         <id column="ID" property="id" jdbcType="BIGINT"/>
         <result column="USER_ID" property="userId" jdbcType="BIGINT"/>
         <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR"/>
-        <result column="PAY_MODE" property="payMode" jdbcType="INTEGER"/>
+        <result column="TRADE_TYPE" property="tradeType" jdbcType="INTEGER"/>
         <result column="TOTAL_AMOUNT" property="totalAmount" jdbcType="DECIMAL"/>
         <result column="STATUS" property="status" jdbcType="INTEGER"/>
         <result column="CLIENT_IP" property="clientIp" jdbcType="VARCHAR"/>
@@ -24,7 +24,7 @@
         <result column="TIME_STAMP" property="timeStamp" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    ID, USER_ID, ORDER_NO, PAY_MODE, TOTAL_AMOUNT, STATUS, CLIENT_IP, DEVICE, TITLE, 
+    ID, USER_ID, ORDER_NO, TRADE_TYPE, TOTAL_AMOUNT, STATUS, CLIENT_IP, DEVICE, TITLE,
     DETAIL, EXTRA, ERR_CODE, ERR_MSG, NOTIFY_URL, NOTIFY_COUNT, LAST_NOTIFY_TIME, EXPIRE_TIME, 
     PAY_SUCCESS_TIME, CREATE_TIME, TIME_STAMP
   </sql>
@@ -40,14 +40,14 @@
   </delete>
     <insert id="insert" parameterType="com.pay.dao.model.OrderPay">
     insert into order_pay (ID, USER_ID, ORDER_NO, 
-      PAY_MODE, TOTAL_AMOUNT, STATUS, 
+      TRADE_TYPE, TOTAL_AMOUNT, STATUS,
       CLIENT_IP, DEVICE, TITLE, 
       DETAIL, EXTRA, ERR_CODE, 
       ERR_MSG, NOTIFY_URL, NOTIFY_COUNT, 
       LAST_NOTIFY_TIME, EXPIRE_TIME, PAY_SUCCESS_TIME, 
       CREATE_TIME, TIME_STAMP)
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, 
-      #{payMode,jdbcType=INTEGER}, #{totalAmount,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, 
+      #{tradeType,jdbcType=INTEGER}, #{totalAmount,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER},
       #{clientIp,jdbcType=VARCHAR}, #{device,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
       #{detail,jdbcType=VARCHAR}, #{extra,jdbcType=VARCHAR}, #{errCode,jdbcType=VARCHAR}, 
       #{errMsg,jdbcType=VARCHAR}, #{notifyUrl,jdbcType=VARCHAR}, #{notifyCount,jdbcType=TINYINT}, 
@@ -66,8 +66,8 @@
             <if test="orderNo != null">
                 ORDER_NO,
             </if>
-            <if test="payMode != null">
-                PAY_MODE,
+            <if test="tradeType != null">
+                TRADE_TYPE,
             </if>
             <if test="totalAmount != null">
                 TOTAL_AMOUNT,
@@ -128,8 +128,8 @@
             <if test="orderNo != null">
                 #{orderNo,jdbcType=VARCHAR},
             </if>
-            <if test="payMode != null">
-                #{payMode,jdbcType=INTEGER},
+            <if test="tradeType != null">
+                #{tradeType,jdbcType=INTEGER},
             </if>
             <if test="totalAmount != null">
                 #{totalAmount,jdbcType=DECIMAL},
@@ -190,8 +190,8 @@
             <if test="orderNo != null">
                 ORDER_NO = #{orderNo,jdbcType=VARCHAR},
             </if>
-            <if test="payMode != null">
-                PAY_MODE = #{payMode,jdbcType=INTEGER},
+            <if test="tradeType != null">
+                TRADE_TYPE = #{tradeType,jdbcType=INTEGER},
             </if>
             <if test="totalAmount != null">
                 TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
@@ -248,7 +248,7 @@
     update order_pay
     set USER_ID = #{userId,jdbcType=BIGINT},
       ORDER_NO = #{orderNo,jdbcType=VARCHAR},
-      PAY_MODE = #{payMode,jdbcType=INTEGER},
+      TRADE_TYPE = #{tradeType,jdbcType=INTEGER},
       TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},
       STATUS = #{status,jdbcType=INTEGER},
       CLIENT_IP = #{clientIp,jdbcType=VARCHAR},
@@ -278,8 +278,8 @@
             <if test="orderNo != null">
                 ORDER_NO = #{orderNo,jdbcType=VARCHAR},
             </if>
-            <if test="payMode != null">
-                PAY_MODE = #{payMode,jdbcType=INTEGER},
+            <if test="tradeType != null">
+                TRADE_TYPE = #{tradeType,jdbcType=INTEGER},
             </if>
             <if test="totalAmount != null">
                 TOTAL_AMOUNT = #{totalAmount,jdbcType=DECIMAL},

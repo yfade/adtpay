@@ -1,7 +1,7 @@
 package com.pay.service;
 
-import com.pay.dao.model.OrderPay;
+import com.pay.dao.vo.serviceVo.PayOrder;
 
 public interface OrderPayService {
-    int insertOrderPayService(OrderPay orderPay);
+    long insertOrderPayService(PayOrder payOrder);
 }

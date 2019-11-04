@@ -10,7 +10,7 @@ public class OrderPay {
 
     private String orderNo;
 
-    private Integer payMode;
+    private Integer tradeType;
 
     private BigDecimal totalAmount;
 
@@ -68,12 +68,12 @@ public class OrderPay {
         this.orderNo = orderNo == null ? null : orderNo.trim();
     }
 
-    public Integer getPayMode() {
-        return payMode;
+    public Integer getTradeType() {
+        return tradeType;
     }
 
-    public void setPayMode(Integer payMode) {
-        this.payMode = payMode;
+    public void setTradeType(Integer tradeType) {
+        this.tradeType = tradeType;
     }
 
     public BigDecimal getTotalAmount() {

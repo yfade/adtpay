@@ -15,7 +15,7 @@ public class PayConstant {
 
     //支付宝支付类型
     public static final String ALI_APP = "ALI_APP";//APP支付
-    public static final String ALI_PC = "WX_PC";//电脑端支付
+    public static final String ALI_PC = "ALI_PC";//电脑端支付
 
     //支付宝交易状态
     public final static String TRADE_STATUS_WAIT = "WAIT_BUYER_PAY";        // 交易创建,等待买家付款

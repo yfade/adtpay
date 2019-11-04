@@ -1,6 +1,9 @@
+<%@ page contentType="text/html; charset=utf-8" %>
 <html>
+<head>
+</head>
 <body>
 <h2>Hello World!!!!!!!!!!!!!!!!</h2>
-<a href="/pay/payAliPC?id=28">扫码支付</a>
+<a href="/pay/payAliPC?id=26">扫码支付</a>
 </body>
 </html>

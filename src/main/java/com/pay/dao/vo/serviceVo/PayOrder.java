@@ -11,9 +11,7 @@ public class PayOrder implements Serializable {
     private String deviceInfo;
 
     //业务字段,提取下单接口参数时要在getWxParamMap方法中过滤掉
-    private Long userId;
-    private String userName;
-
+    private BizModel bizModel; //必传
 
     public String getBody() {
         return body;
@@ -63,19 +61,11 @@ public class PayOrder implements Serializable {
         this.deviceInfo = deviceInfo;
     }
 
-    public Long getUserId() {
-        return userId;
+    public BizModel getBizModel() {
+        return bizModel;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setBizModel(BizModel bizModel) {
+        this.bizModel = bizModel;
     }
 }

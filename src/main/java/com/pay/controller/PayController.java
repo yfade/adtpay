@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
@@ -180,7 +181,7 @@ public class PayController {
             aliPayOrder.setTimeoutExpress("30m");
             aliPayOrder.setTotalAmount(orderVo.getTotalAmount().setScale(2, BigDecimal.ROUND_HALF_UP));
             aliPayOrder.setNotifyUrl("http://www.example.com/wxpay/notify");
-            aliPayOrder.setTradeType(PayConstant.ALI_PC);
+            aliPayOrder.setTradeType(PayConstant.ALI_APP);
             aliPayOrder.setSpbillCreateIp("127.0.0.1");
             aliPayOrder.setDeviceInfo((String) data.get("deviceInfo"));
 
@@ -193,6 +194,43 @@ public class PayController {
             return ResultMsg.fail();
         }
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/payAliPC")
+    public void payAliPC(String id, HttpServletRequest request, HttpServletResponse response) {
+        if (StringUtils.isBlank(id)) {
+            return;
+        }
+
+        OrderVo orderVo = orderService.selectOrderDetail(Long.valueOf(id));
+        if (orderVo == null) {
+            return;
+        }
+        try {
+            AliPayOrder aliPayOrder = new AliPayOrder();
+            aliPayOrder.setOutTradeNo(orderVo.getOrderNo());
+            aliPayOrder.setProductCode("FAST_INSTANT_TRADE_PAY");
+            aliPayOrder.setTotalAmount(orderVo.getTotalAmount().setScale(2, BigDecimal.ROUND_HALF_UP));
+            aliPayOrder.setSubject(SystemEnum.QTCAPP.getMsg() + orderVo.getGoodsName() + orderVo.getGoodsName());
+            aliPayOrder.setBody(orderVo.getDescription());
+            aliPayOrder.setTimeoutExpress("30m");
+            aliPayOrder.setTradeType(PayConstant.ALI_PC);
+
+            aliPayOrder.setUserId(orderVo.getUserId());
+            aliPayOrder.setUserName(orderVo.getUserName());
+            ResultMsg resultMsg = payService.payOrder(aliPayOrder);
+            if (resultMsg.getCode() == 1) {
+                String result = resultMsg.getData().toString();
+                response.setContentType("text/html;charset=" + AliDevPayConfig.CHARSET);
+                response.getWriter().write(result);//直接将完整的表单html输出到页面
+                response.getWriter().flush();
+                response.getWriter().close();
+            }
+        } catch (Exception e) {
+            logger.error("PayController payAliPC error:", e);
+        }
+    }
+
 
     /**
      * 微信支付异步通知

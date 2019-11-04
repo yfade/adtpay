@@ -300,6 +300,7 @@ public class PayServiceImpl implements PayService {
         JSONObject jsonObject = JSONObject.parseObject(reqJson);
         jsonObject.remove("user_id");
         jsonObject.remove("user_name");
+        System.out.println(jsonObject.toJSONString());
         return jsonObject.toJSONString();
     }
 

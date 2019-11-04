@@ -7,7 +7,7 @@ public class OrderNoGenerator {
     public static String getOrderNo(Integer bsnsType) {
         String ss = bsnsType.toString();
         ss += new Date().getTime();
-        ss += new Random().nextInt(100);
+        ss += new Random().nextInt(90) + 10;
         return ss;
     }
 

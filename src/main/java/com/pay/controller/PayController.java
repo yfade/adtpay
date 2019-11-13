@@ -56,6 +56,7 @@ public class PayController {
 
     @RequestMapping("/toIndex")
     public String toIndex() {
+        logger.info("enter index...");
         return "index";
     }
 

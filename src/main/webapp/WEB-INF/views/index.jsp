@@ -4,6 +4,6 @@
 </head>
 <body>
 <h2>Hello World!!!!!!!!!!!!!!!!</h2>
-<a href="/pay/payAliPC?id=26">扫码支付</a>
+<a href="/pay/payAliPC?id=29">扫码支付</a>
 </body>
 </html>

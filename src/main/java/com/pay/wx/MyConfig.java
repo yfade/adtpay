@@ -17,15 +17,15 @@ public class MyConfig extends WXPayConfig {
     }
 
     public String getAppID() {
-        return "wx8888888888888888";
+        return "wx426b3015555a46belllllllllllllll";
     }
 
     public String getMchID() {
-        return "12888888";
+        return "1900009851";
     }
 
     public String getKey() {
-        return "88888888888888888888888888888888";
+        return "8934e7d15453e97507ef794cf7b0519d";
     }
 
     public InputStream getCertStream() {

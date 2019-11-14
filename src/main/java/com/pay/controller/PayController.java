@@ -186,7 +186,8 @@ public class PayController {
             aliPayOrder.setTotalAmount(orderVo.getTotalAmount().setScale(2, BigDecimal.ROUND_HALF_UP));
             aliPayOrder.setNotifyUrl("http://www.example.com/wxpay/notify");
             aliPayOrder.setTradeType(PayConstant.ALI_APP);
-            aliPayOrder.setSpbillCreateIp("127.0.0.1");
+            aliPayOrder.setSpbillCreateIp(request.getRemoteAddr());
+            logger.info("payOrderAli ip:" + aliPayOrder.getSpbillCreateIp());
             aliPayOrder.setDeviceInfo((String) data.get("deviceInfo"));
 
             BizModel bizModel = new BizModel();
@@ -221,8 +222,7 @@ public class PayController {
             aliPayOrder.setBody(orderVo.getDescription());
             aliPayOrder.setTimeoutExpress("30m");
             aliPayOrder.setTradeType(PayConstant.ALI_PC);
-            aliPayOrder.setDeviceInfo("honor9");
-            aliPayOrder.setSpbillCreateIp("127.0.0.1");
+            aliPayOrder.setSpbillCreateIp(request.getRemoteAddr());
 
             BizModel bizModel = new BizModel();
             bizModel.setUserId(orderVo.getUserId());
@@ -239,6 +239,11 @@ public class PayController {
         } catch (Exception e) {
             logger.error("PayController payAliPC error:", e);
         }
+    }
+
+    @RequestMapping("/aliPCPaySuccess")
+    public String aliPCPaySuccess(HttpServletRequest request){
+        return "aliPCSuccess";
     }
 
 
@@ -304,8 +309,10 @@ public class PayController {
      */
     @RequestMapping(value = "/aliNotify", method = RequestMethod.POST)
     public String aliNotify(HttpServletRequest request) {
+        logger.info("aliNotify begin...");
         // 提取参数
         Map<String, String> params = getAliNotifyParams(request);
+        logger.info("aliNotify params:" + params.toString());
         String result = "fail";
         try {
             boolean flag = AlipaySignature.rsaCheckV1(params, AliDevPayConfig.ALIPAY_PUBLIC_KEY, AliDevPayConfig.CHARSET, AliDevPayConfig.SIGNTYPE);
@@ -328,6 +335,7 @@ public class PayController {
                 if (tradeStatue.equals(PayConstant.TRADE_STATUS_SUCCESS) || tradeStatue.equals(PayConstant.TRADE_STATUS_FINISHED)) {
                     orderService.updateSuccessByAliNotify(order.getId(), params);
                     result = "success";
+                    logger.info("aliNotify success...");
                 } else {
                     //支付失败，修改订单状态
                     logger.error("aliNotify tradeStatus={}", tradeStatue);
